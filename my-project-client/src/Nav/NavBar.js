@@ -20,9 +20,9 @@ class NavBar extends React.Component {
       ];
     }
     return [
-      <div key="signin">
-        <Link to="/signin">
-          Sign in /
+      <div key="login">
+        <Link to="/login">
+          Login /
         </Link>
       </div>,
       <div key="signup">
@@ -51,6 +51,11 @@ class NavBar extends React.Component {
           <Link to="/discover">
             DISCOVER
           </Link>
+        <div className="profile">
+          <Link to="/profile">
+            MY PROFILE
+          </Link>
+        </div>
           <nav className="navbar">
             <div className="container">
               <Link to="/">
