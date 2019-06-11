@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Button } from 'semantic-ui-react'
 import Slider from './Slider'
+import MyItems from './MyItems'
 
 class MyProfile extends React.Component {
 

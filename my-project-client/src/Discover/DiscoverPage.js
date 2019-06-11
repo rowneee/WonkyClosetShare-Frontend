@@ -1,11 +1,16 @@
 import React from 'react'
 import AllItems from './AllItems'
 import ItemCard from './ItemCard'
+import { Card } from 'semantic-ui-react'
 
 class DiscoverPage extends React.Component {
 
+  handleClick = (itemId) => {
+    this.props.onChosenItem(itemId)
+  }
+
   render() {
-    console.log("Disc", this.state);
+    console.log("Disc", this.props);
     return (
       <div className="ui container">
         <div className="ui five column grid">
@@ -15,6 +20,8 @@ class DiscoverPage extends React.Component {
                 item={item}
                 key={item.id}
                 id={item.id}
+                handleBorrowClick={this.borrowItem}
+                isBorrowed={this.props.isBorrowed}
                 handleClick={this.handleClick}
                 />
             })}

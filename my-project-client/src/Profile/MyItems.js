@@ -1,12 +1,10 @@
 import React from 'react'
 
-class Item extends React.Component {
+class MyItems extends React.Component {
   render() {
-    return(
+    return (
       <>
       </>
     )
   }
 }
-
-export default Item

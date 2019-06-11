@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { LOGIN } from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Actions/types.js';
 import { login } from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Actions/userActions.js';
+import { itemsFetch } from '../../Actions/userActions'
 
 class Login extends Component {
   state = {
@@ -34,6 +35,7 @@ class Login extends Component {
         const { token, user } = data
         localStorage.setItem('token', token)
         this.props.login(user)
+        this.props.fetchItems()
       })
   }
 

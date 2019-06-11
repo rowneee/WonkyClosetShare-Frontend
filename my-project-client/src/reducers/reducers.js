@@ -6,7 +6,6 @@ import usersReducer from './usersReducer'
 
 const rootReducer = combineReducers({
   form: formReducer,
-  auth: authReducer,
   user: usersReducer
 });
 

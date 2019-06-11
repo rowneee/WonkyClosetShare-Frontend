@@ -39,8 +39,7 @@ class NavBar extends React.Component {
       <div className='ui tabular menu'>
         <Link
           className='item'
-          to="/"
-        >
+          to="/">
           <h2 className="ui header">
             <div className="content">
               Home
@@ -51,32 +50,38 @@ class NavBar extends React.Component {
           <Link to="/discover">
             DISCOVER
           </Link>
+        </div>
+      </div>
+
+      <div>
+        {this.props.isLoggedIn ?
         <div className="profile">
           <Link to="/profile">
             MY PROFILE
           </Link>
         </div>
-          <nav className="navbar">
-            <div className="container">
-              <Link to="/">
-              </Link>
-                {this.navbarLinks()}
-            </div>
-          </nav>
-        </div>
+        :
+        <nav className="navbar">
+          <div className="container">
+            <Link to="/">
+              {this.navbarLinks()}
+            </Link>
+          </div>
+        </nav>
+      }
       </div>
       </>
     );
   }
 }
 
-function mapStateToProps(state) {
-  // console.log("here", state.auth);
-  return {
-    authenticated: state.auth.authenticated
-  };
-}
-export default connect(mapStateToProps)(NavBar);
+// function mapStateToProps(state) {
+//   // console.log("here", state.auth);
+//   return {
+//     authenticated: state.auth.authenticated
+//   };
+// }
+export default connect()(NavBar);
 
 //   render() {
 //   //   console.log('Navbar starts rendering');

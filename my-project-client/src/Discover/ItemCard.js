@@ -1,5 +1,7 @@
 import React from 'react';
 import { Button, Card, Image } from 'semantic-ui-react'
+import AddToCloset from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Discover/AddtoCloset.js'
+
 
 class ItemCard extends React.Component{
 
@@ -11,29 +13,28 @@ class ItemCard extends React.Component{
   //   this.props.handleRemove(songId)
   // }
 
-  // setCloset = (playlistId) => {
-  //   const API = 'http://localhost:3000/api/'
-  //   console.log(playlistId);
-  //   // this.setState({activePlaylist: playlistId})
-  //   //add song to playlist backend
-  //   fetch(API , {
-  //     method: 'POST',
-  //     headers:{
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       song_id: this.props.item.id,
-  //       playlist_id: playlistId
-  //     })
-  //   })
-  //   .then(r => r.json())
-  //   .then((data) => {
-  //     console.log('data', data);
-  //     this.props.addToPlaylist(data.playlist_id, data.song)
-  //     // fetch('http://localhost:3000/api/playlists')
-  //   })
-  // }
+  addItemToCloset = (itemId, userId) => {
+    // e.preventDefault()
+    const API = 'http://localhost:3000/api/items'
+    // this.setState({activePlaylist: playlistId})
+    //add song to playlist backend
+    fetch(API , {
+      method: 'PATCH',
+      headers:{
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        owner_id: null,
+        borrower_id: null
+      })
+    })
+    .then(r => r.json())
+    .then((data) => {
+      console.log('data', data);
+      this.props.addToPlaylist(data.item)
+    })
+  }
 
   // handleRemove = (songId) => {
   //   fetch('http://localhost:3000/api/song_playlists', {
@@ -52,6 +53,10 @@ class ItemCard extends React.Component{
   //     // fetch('http://localhost:3000/api/playlists')
   //   })
   // }
+
+  handleClick = () => {
+
+  }
 
   toggleDetails = () => {
     this.setState({details: !this.state.details})
@@ -75,7 +80,7 @@ class ItemCard extends React.Component{
   )}
   else if (this.state.details === true) {
     return (
-      <Card onClick={this.toggleDetails} handleClick={this.props.handleClick}>
+      <Card onClick={this.toggleDetails}>
         <Card.Content className="cardBack">
           <Image floated='right' size='mini' src={this.props.item.img_url} />
           <Card.Header>{this.props.item.name}</Card.Header>
@@ -85,6 +90,12 @@ class ItemCard extends React.Component{
           </Card.Description>
         </Card.Content>
         <Card.Content extra>
+          <AddToCloset
+            item={this.props.item}
+            isBorrowed={this.props.isBorrowed}
+            addItemToCloset={this.addItemToCloset}
+            handleClick={this.props.handleClick}
+          />
         </Card.Content>
        </Card>
       )
