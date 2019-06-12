@@ -70,6 +70,9 @@ export const logout = ({
   type: LOGOUT
 })
 
+export const borrowitem = (user) => {
+  //do something 
+}
 export const autoLogin = (user) => {
   // fetch('localhost:4000/api/v1/auto_login')
   //   .then(r => r.json())

@@ -14,14 +14,13 @@ class AddToCloset extends React.Component {
     } else if (!this.props.isBorrowed) {
       return(
         <div>
-        {this.props.items.map(item => {
-          return <Button
-          key = {item.id}
-          text={item.name}
-          addItemToCloset={this.addItemToCloset}
-          onClick={()=>this.props.addItemToCloset(item.id)}
-          />
-        })}
+        <Button
+          key={this.props.item.id}
+          text={this.props.item.name}
+          onClick={()=>this.props.addItemToCloset(this.props.item.id)}
+         >
+         Borrow
+        </Button>
         </div>
       )
     }

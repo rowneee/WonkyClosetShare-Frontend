@@ -50,37 +50,41 @@ class App extends React.Component {
       .then(data => {
         // dispatch the logged in user
         // data or data.user {id: 1, name: 'hi'}
+        this.setState({current_user: data})
         console.log("ive reached", data)
         this.props.autoLogin(data)
-        this.fetchItems()
+        this.fetchItems(this.state.current_user)
+        // if the item's owner_id matches the current_user id then add to myItems
+
         // this.props.history.push()
         // dispatch to redux, that sets the current user in the redux store
         // then other components can get that data from the store (in mapStateToProps)
       })
     }
     // else {
-    //
-    //   // this.setState({current_user: data.user})
-    //   //it the localstorage has the token
-    //   //set state to current user
+    // console.log("else", data);
+    //   this.setState({current_user: data.user})
+    // //   //it the localstorage has the token
+    // //   //set state to current user
     // }
   }
 
-  // borrowItem = (ItemId) => {
-  //   console.log("whatAMI", itemId);
-  //   const updatedItems = this.state.items.map(item => {
-  //     if (item.id === itemId) {
-  //       return {
-  //         items: {...this.state.items, item}
-  //       }
-  //     } else {
-  //       return item
-  //     }
-  //   })
-  //   this.setState({items: updatedItems})
-  // }
+  borrowItem = (itemId) => {
+    console.log("whatAMI", itemId);
+    const updatedItems = this.state.items.map(item => {
+      if (item.id === itemId) {
+        return {
+          items: {...this.state.items, item},
+          borrowedItems: {...this.state.borrowedItems, item}
+        }
+      } else {
+        return item
+      }
+    })
+    this.setState({items: updatedItems, borrowedItems: updatedItems})
+  }
 
-  handleChosenCard = (itemId, userId) => {
+  handleChosenItem = (itemId) => {
     this.setState(prevState => {
       return {
         items: prevState.items.map(item => {
@@ -98,7 +102,9 @@ class App extends React.Component {
     this.setState({search: value})
   }
 
-  fetchItems = () => {
+  fetchItems = (current_user) => {
+    console.log("im da user", current_user);
+    console.log("user id type:", typeof(current_user.id));
     const token = localStorage.getItem('token')
     fetch("http://localhost:3000/api/v1/items", {
       headers: {
@@ -108,7 +114,14 @@ class App extends React.Component {
     .then(resp => resp.json())
     .then(data => {
       console.log("fdgfe", data)
-      this.setState({items: data})
+      this.setState({
+        items: data,
+        myItems: data.filter(item => item.owner_id === current_user.id),
+        tops: data.filter(item => item.category === "Tops"),
+        bottoms: data.filter(item => item.category === "Bottoms"),
+        shoes: data.filter(item => item.category === "Shoes"),
+        accessories: data.filter(item => item.category === "Accessories")
+      })
     })
   }
 
@@ -124,7 +137,7 @@ class App extends React.Component {
   // }
 
   render() {
-    console.log("im here", this.props);
+    console.log("im here", this.state);
     const isBorrowed = this.state.items.filter(item => item.borrowed)
     return (
       <div className="ui centered container">
@@ -140,35 +153,36 @@ class App extends React.Component {
           background={'blue'}
         />
 
-        <div className="ui segment">
+      <div className="ui container" style={{justifyContent: 'center', width: 1200, marginWidth: "50"}}>
           <NavBar isLoggedIn={this.props.isLoggedIn}/>
-
-          {this.props.isLoggedIn
-            ?
             <div>
-              <Route path="/" render={(props)=> <HomePage {...props}
+              <Route exact path="/" render={(props)=> <HomePage {...props}
                 items={this.state.items}
                 />}
               />
-              <Route path="/discover" render={(props)=> <DiscoverPage {...props}
+            <Route exact path="/discover" render={(props)=> <DiscoverPage {...props}
                 items={this.state.items}
                 borrowItem={this.borrowItem}
-                isBorrowed={isBorrowed}
-                onChosenCard={this.handleChosenCard}
+                isBorrowed={this.isBorrowed}
+                onChosenItem={this.handleChosenItem}
                 />}
               />
-              <Route path="/profile" render={(props)=> <MyProfile {...props}
+            <Route exact path="/profile" render={(props)=> <MyProfile {...props}
                 items={this.state.items}
+                borrowedItems={this.borrowedItems}
+                myItems={this.state.myItems}
+                accessories={this.state.accessories}
+                tops={this.state.tops}
+                bottoms={this.state.bottoms}
+                shoes={this.state.shoes}
                 isBorrowed={isBorrowed}
                 />}
               />
             </div>
-            :
             <div>
-              <Route path="/login" render={props => <Login {...props} fetchItems={this.fetchItems}/>} />
-              <Route path="/signup" component={SignUp} />
+              <Route exact path="/login" render={props => <Login {...props} fetchItems={this.fetchItems}/>} />
+              <Route exact path="/signup" component={SignUp} />
             </div>
-            }
         </div>
       </div>
     )
@@ -182,5 +196,6 @@ const mapStateToProps = state => {
     user: state.user
   }
 }
+
 
 export default withRouter(connect(mapStateToProps, { autoLogin })(App))

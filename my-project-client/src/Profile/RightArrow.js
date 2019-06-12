@@ -1,9 +1,11 @@
 import React from 'react';
-
+import {Button} from 'semantic-ui-react'
 const RightArrow = () => {
   return (
     <div className="nextArrow">
-      <i className="fa fa-arrow-right fa-2x" aria-hidden="true"></i>
+      <button class="ui circular icon button">
+        <i aria-hidden="true" class="right arrow icon"></i>
+      </button>
     </div>
   );
 }

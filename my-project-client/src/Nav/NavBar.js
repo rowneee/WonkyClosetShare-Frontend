@@ -36,13 +36,13 @@ class NavBar extends React.Component {
     const { title, color, icon } = this.props
     return (
       <>
-      <div className='ui tabular menu'>
+      <div className='ui menu navbar' style={{margin: 0}}>
         <Link
           className='item'
           to="/">
           <h2 className="ui header">
             <div className="content">
-              Home
+              WONKY
             </div>
           </h2>
         </Link>
@@ -51,9 +51,6 @@ class NavBar extends React.Component {
             DISCOVER
           </Link>
         </div>
-      </div>
-
-      <div>
         {this.props.isLoggedIn ?
         <div className="profile">
           <Link to="/profile">
@@ -61,14 +58,12 @@ class NavBar extends React.Component {
           </Link>
         </div>
         :
-        <nav className="navbar">
-          <div className="container">
-            <Link to="/">
-              {this.navbarLinks()}
-            </Link>
-          </div>
-        </nav>
-      }
+        <div className="container">
+          <Link to="/">
+            {this.navbarLinks()}
+          </Link>
+        </div>
+        }
       </div>
       </>
     );

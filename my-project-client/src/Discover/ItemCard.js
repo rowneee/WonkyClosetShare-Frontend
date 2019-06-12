@@ -1,7 +1,6 @@
-import React from 'react';
+  import React from 'react';
 import { Button, Card, Image } from 'semantic-ui-react'
 import AddToCloset from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Discover/AddtoCloset.js'
-
 
 class ItemCard extends React.Component{
 
@@ -13,7 +12,7 @@ class ItemCard extends React.Component{
   //   this.props.handleRemove(songId)
   // }
 
-  addItemToCloset = (itemId, userId) => {
+  addItemToCloset = itemId => {
     // e.preventDefault()
     const API = 'http://localhost:3000/api/items'
     // this.setState({activePlaylist: playlistId})
@@ -24,15 +23,14 @@ class ItemCard extends React.Component{
         Accept: 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({
-        owner_id: null,
-        borrower_id: null
-      })
+      // body: JSON.stringify({
+      //
+      // })
     })
     .then(r => r.json())
     .then((data) => {
       console.log('data', data);
-      this.props.addToPlaylist(data.item)
+      this.props.borrowItem(data.id)
     })
   }
 
@@ -66,38 +64,34 @@ class ItemCard extends React.Component{
     console.log(this.props);
     if (this.state.details === false) {
       return (
-    <div className="ui column item-card" >
-      <Card onClick={this.toggleDetails}>
-        <Image src={this.props.item.img_url} wrapped ui={false} />
-        <Card.Content>
-            <Card.Header>{this.props.item.name}</Card.Header>
-              <Card.Description>
-            {this.props.item.description}
-          </Card.Description>
-        </Card.Content>
-      </Card>
+    <div className="card-list">
+      <div class="card" onClick={this.toggleDetails}>
+        <img src={this.props.item.img_url} alt="item-image" className="card-image"/>
+        <div class="container">
+          <h4><b>{this.props.item.name}</b></h4>
+          <p>{this.props.item.description}</p>
+        </div>
+      </div>
     </div>
   )}
   else if (this.state.details === true) {
     return (
-      <Card onClick={this.toggleDetails}>
-        <Card.Content className="cardBack">
-          <Image floated='right' size='mini' src={this.props.item.img_url} />
-          <Card.Header>{this.props.item.name}</Card.Header>
-          <Card.Meta>{this.props.item.artist}</Card.Meta>
-          <Card.Description>
-            Borrow this item?
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
-          <AddToCloset
-            item={this.props.item}
-            isBorrowed={this.props.isBorrowed}
-            addItemToCloset={this.addItemToCloset}
-            handleClick={this.props.handleClick}
-          />
-        </Card.Content>
-       </Card>
+      <div className="card-list">
+        <div class="card" onClick={this.toggleDetails}>
+          <div class="container">
+            <h4><b>{this.props.item.name}</b></h4>
+            <p>Borrow this item?</p>
+            <div>
+              <AddToCloset
+                item={this.props.item}
+                isBorrowed={this.props.isBorrowed}
+                addItemToCloset={this.addItemToCloset}
+                handleClick={this.props.handleClick}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
       )
     }
   }

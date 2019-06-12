@@ -20,9 +20,10 @@ class DiscoverPage extends React.Component {
                 item={item}
                 key={item.id}
                 id={item.id}
-                handleBorrowClick={this.borrowItem}
+                borrowItem={()=>this.borrowItem}
                 isBorrowed={this.props.isBorrowed}
                 handleClick={this.handleClick}
+                addItemToCloset={this.props.addItemToCloset}
                 />
             })}
           </div>
