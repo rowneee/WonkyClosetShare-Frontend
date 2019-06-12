@@ -5,7 +5,7 @@ import RightArrow from './RightArrow'
 import {Container} from 'semantic-ui-react'
 
 export default class Slider extends Component {
-  
+
   state = {
     currentIndex: 0,
     translateValue: 0
@@ -58,7 +58,42 @@ export default class Slider extends Component {
              ))
            }
        </div>
+       <LeftArrow
+        goToPrevSlide={this.goToPrevSlide}
+       />
 
+       <RightArrow
+        goToNextSlide={this.goToNextSlide}
+       />
+       <div className="slider-wrapper"
+         style={{
+           transform: `translateX(${this.state.translateValue}px)`,
+           transition: 'transform ease-out 0.45s'
+         }}>
+           {
+             this.props.items.map((item, i) => (
+               <Slide key={i} item={item} />
+             ))
+           }
+       </div>
+       <LeftArrow
+        goToPrevSlide={this.goToPrevSlide}
+       />
+
+       <RightArrow
+        goToNextSlide={this.goToNextSlide}
+       />
+       <div className="slider-wrapper"
+         style={{
+           transform: `translateX(${this.state.translateValue}px)`,
+           transition: 'transform ease-out 0.45s'
+         }}>
+           {
+             this.props.items.map((item, i) => (
+               <Slide key={i} item={item} />
+             ))
+           }
+       </div>
        <LeftArrow
         goToPrevSlide={this.goToPrevSlide}
        />

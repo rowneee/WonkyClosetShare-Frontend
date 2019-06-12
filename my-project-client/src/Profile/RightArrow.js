@@ -1,9 +1,10 @@
 import React from 'react';
 import {Button} from 'semantic-ui-react'
-const RightArrow = () => {
+const RightArrow = (props) => {
+
   return (
     <div className="nextArrow">
-      <button class="ui circular icon button">
+      <button class="ui circular icon button" onClick={props.goToNextSlide}>
         <i aria-hidden="true" class="right arrow icon"></i>
       </button>
     </div>
