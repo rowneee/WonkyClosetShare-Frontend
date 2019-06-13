@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
+import React, { Fragment } from 'react'
 import { connect } from 'react-redux'
-import { LOGIN } from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Actions/types.js';
-import { login } from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Actions/userActions.js';
+import { LOGIN } from '../../Actions/types';
+import { login } from '../../Actions/userActions';
 import { itemsFetch } from '../../Actions/userActions'
+import { Link } from 'react-router-dom'
 
-class Login extends Component {
+class Login extends React.Component {
   state = {
     username: '',
     password: ''
@@ -16,7 +17,7 @@ class Login extends Component {
     })
   }
 
-  handleSubmit = (e) => {
+  handleLoginSubmit = (e) => {
     e.preventDefault()
 
     fetch('http://localhost:3000/api/v1/login', {
@@ -42,30 +43,36 @@ class Login extends Component {
   render() {
     console.log('LOGIN FORM props: ', this.props)
     return (
-      <div>
-        Login Form
-        <form onSubmit={this.handleSubmit}>
-          <input
-            name='username'
-            onChange={this.handleChange}
-            value={this.state.username}
-            type="text"
-          />
-          <input
-            name='password'
-            onChange={this.handleChange}
-            value={this.state.password}
-            type="text"
-          />
-          <button
-            className="ui primary button"
-            type="submit"
-          >
-            Login
-          </button>
-        </form>
+      <Fragment>
+      <div style={{marginTop: '10%'}} className="row">
+          <form  onSubmit={this.handleLoginSubmit} className="col s12 m4 offset-m4">
+            <div className="card">
+              <div className="card-action cyan lighten-2 white-text">
+                <h3>Login Form</h3>
+              </div>
+              <div className="card-content">
+              // { !this.props.failedLogin ? null : this.props.error }
+                <div className="form-field">
+                  <input onChange={this.handleChange} type='text' name="username" placeholder="Username" value={this.state.username} required autoComplete="off" />
+                </div><br />
 
-      </div>
+                <div className="form-field">
+                  <input onChange={this.handleChange} type='password' name="password" placeholder="Password" value={this.state.password} required autoComplete="off" />
+                </div><br />
+
+                <div className="form-field">
+                  <button className="btn-large waves-effect waves-dark cyan lighten-2" type="submit" style={{width: '100%', fontFamily: 'Hammersmith One, sans-serif'}}>
+                    Login
+                  </button>
+                </div>
+
+              </div>
+
+            </div>
+          </form>
+        </div>
+            First time here? <Link to="/signup">Sign Up</Link>
+      </Fragment>
     )
   }
 }

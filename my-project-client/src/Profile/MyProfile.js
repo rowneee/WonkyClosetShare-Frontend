@@ -1,15 +1,20 @@
 import React from 'react'
 import { Card, Button } from 'semantic-ui-react'
-import Slider from './Slider'
+import SliderContainer from './SliderContainer'
 import MyItems from './MyItems'
+import NewItemForm from './NewItemForm'
 
 class MyProfile extends React.Component {
+
+  openWidget = () => {
+
+  }
 
   render() {
     console.log("profile", this.props);
     return (
       <div>
-        <Slider
+        <SliderContainer
           items={this.props.items}
           borrowedItems={this.props.borrowedItems}
           myItems={this.props.myItems}

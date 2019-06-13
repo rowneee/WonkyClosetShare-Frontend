@@ -71,17 +71,16 @@ class App extends React.Component {
 
   borrowItem = (itemId) => {
     console.log("whatAMI", itemId);
-    const updatedItems = this.state.items.map(item => {
-      if (item.id === itemId) {
-        return {
-          items: {...this.state.items, item},
-          borrowedItems: {...this.state.borrowedItems, item}
-        }
-      } else {
-        return item
-      }
-    })
-    this.setState({items: updatedItems, borrowedItems: updatedItems})
+    const itemsWithRemove = this.state.items.filter(item => item.id !== itemId)
+    const updatedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
+    this.setState({items: itemsWithRemove, borrowedItems: updatedItems})
+  }
+
+  returnItem = (itemId) => {
+    console.log("return item??", itemId);
+    const removedFromMyCloset = this.state.borrowedItems.filter(item=>item.id!==itemId)
+    const updatedItems = this.state.items.filter(item=>item.id===itemId)
+    this.setState({items: updatedItems, borrowedItems: removedFromMyCloset})
   }
 
   handleChosenItem = (itemId) => {
@@ -125,22 +124,11 @@ class App extends React.Component {
     })
   }
 
-  // componentDidUpdate() {
-  //   fetch("http://localhost:3000/api/v1/items", {
-    //       headers: {
-    //         Authorization: `${token}`
-    //       }
-    //     })
-    //     .then(resp => resp.json())
-    //     .then(data => {
-    //       setState
-  // }
-
   render() {
     console.log("im here", this.state);
     const isBorrowed = this.state.items.filter(item => item.borrowed)
     return (
-      <div className="ui centered container">
+      <div>
         <Sky
           images={{
             0: "https://scubasanmateo.com/images/cotton-clipart-animated-10.png",
@@ -149,11 +137,11 @@ class App extends React.Component {
           }}
           how={130}
           time={40}
-          size={'100px'}
+          size={'50px'}
           background={'blue'}
         />
 
-      <div className="ui container" style={{justifyContent: 'center', width: 1200, marginWidth: "50"}}>
+      <div className="container">
           <NavBar isLoggedIn={this.props.isLoggedIn}/>
             <div>
               <Route exact path="/" render={(props)=> <HomePage {...props}

@@ -5,7 +5,10 @@ import {
 } from "../Actions/types";
 
 const initialState = {
-  user: null
+  user: null,
+  loggedIn: false,
+  authenticatingUser: false,
+  failedLogin: false
 }
 
 // TODO: do you need to nest the state here user.user
@@ -19,13 +22,9 @@ const usersReducer = (state = initialState, action) => {
         user: action.payload
       }
     case LOGOUT:
-      return {
-        user: null
-      }
+      return initialState
     case SIGNUP:
-      return {
-        user: action.payload
-      }
+      return { ...state, user: action.payload, loggedIn: true, authenticatingUser: false }
     default:
       return state
   }

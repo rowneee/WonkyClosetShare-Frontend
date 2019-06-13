@@ -12,7 +12,7 @@ class DiscoverPage extends React.Component {
   render() {
     console.log("Disc", this.props);
     return (
-      <div className="ui container">
+      <div className="container">
         <div className="ui five column grid">
           <div className="row card-row">
             {this.props.items.map(item => {

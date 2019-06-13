@@ -12,7 +12,7 @@ class ItemCard extends React.Component{
   //   this.props.handleRemove(songId)
   // }
 
-  addItemToCloset = itemId => {
+  addItemToCloset = () => {
     // e.preventDefault()
     const API = 'http://localhost:3000/api/items'
     // this.setState({activePlaylist: playlistId})
@@ -22,10 +22,7 @@ class ItemCard extends React.Component{
       headers:{
         Accept: 'application/json',
         'Content-Type': 'application/json'
-      },
-      // body: JSON.stringify({
-      //
-      // })
+      }
     })
     .then(r => r.json())
     .then((data) => {
@@ -34,23 +31,22 @@ class ItemCard extends React.Component{
     })
   }
 
-  // handleRemove = (songId) => {
-  //   fetch('http://localhost:3000/api/song_playlists', {
-  //     method: "DELETE",
-  //     headers:{
-  //       Accept: 'application/json',
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       song_id: songId,
-  //     })
-  //   }).then(r => r.json())
-  //   .then((data) => {
-  //     console.log('data song', data);
-  //     this.props.removeFromPlaylist(data.song)
-  //     // fetch('http://localhost:3000/api/playlists')
-  //   })
-  // }
+  removeItemFromCloset = () => {
+    fetch('http://localhost:3000/api/items', {
+      method: "PATCH",
+      headers:{
+        Accept: 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        borrower_id: null
+      })
+    }).then(r => r.json())
+    .then((data) => {
+      console.log('return data', data);
+      this.props.returnItem(data.id)
+    })
+  }
 
   handleClick = () => {
 

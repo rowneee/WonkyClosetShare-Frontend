@@ -36,27 +36,44 @@ class NavBar extends React.Component {
     const { title, color, icon } = this.props
     return (
       <>
-      <div className='ui menu navbar' style={{margin: 0}}>
-        <Link
-          className='item'
-          to="/">
-          <h2 className="ui header">
-            <div className="content">
-              WONKY
+      <div className='navbar' style={{margin: 0}}>
+        <div class="dropdown item">
+          <button class="dropbtn">
+            <Link
+              className='item'
+              to="/">
+              <h2 className="ui header">
+                <div className="content">
+                  <img src="/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/images/alex.jpg"></img>
+                </div>
+              </h2>
+            </Link>
+          </button>
+        </div>
+        <div class="dropdown item">
+          <button class="dropbtn">
+            <div className="item">
+              <Link to="/discover">
+                DISCOVER
+              </Link>
             </div>
-          </h2>
-        </Link>
-        <div className="item">
-          <Link to="/discover">
-            DISCOVER
-          </Link>
+          </button>
+          <div class="dropdown-content">
+            <a href="#">Find Some Clothes</a>
+            <a href="#">Currently Borrowing</a>
+            <a href="#">Explore</a>
+          </div>
         </div>
         {this.props.isLoggedIn ?
-        <div className="profile">
-          <Link to="/profile">
-            MY PROFILE
-          </Link>
-        </div>
+          <div class="dropdown item">
+            <button class="dropbtn">
+              <div className="item">
+                <Link to="/profile">
+                  MY PROFILE
+                </Link>
+              </div>
+            </button>
+          </div>
         :
         <div className="container">
           <Link to="/">

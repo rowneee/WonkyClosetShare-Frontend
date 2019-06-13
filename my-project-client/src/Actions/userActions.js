@@ -59,19 +59,40 @@ export const login = user => {
   // dispatch all th4e goods
 }
 
-export const signup = (user) => {
-  return {
-    type: SIGNUP,
-    payload: user
-  }
+export const setCurrentUser = (userData) => ({
+  type: SIGNUP,
+  payload: userData
+})
+
+// export const authenticatingUser = () => ({ type: 'AUTHENTICATING_USER' })
+
+export const signup = (username, password) => {
+  return (dispatch) => {
+	  const data = { user: {username, password} }
+	    fetch('http://localhost:3000/api/v1/users', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Accept: 'application/json'
+				},
+        body: JSON.stringify(data)
+      })
+      .then(res => res.json())
+	    .then(res => {
+		    localStorage.setItem('jwt', res.jwt)
+		    dispatch({ type: SIGNUP, payload: res.user})
+	     })
+	}
 }
 
 export const logout = ({
   type: LOGOUT
 })
 
+// export const logout = () => ({ type: 'LOGOUT_USER' })
+
 export const borrowitem = (user) => {
-  //do something 
+  //do something
 }
 export const autoLogin = (user) => {
   // fetch('localhost:4000/api/v1/auto_login')
