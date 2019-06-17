@@ -4,6 +4,7 @@ import { LOGIN } from '../../Actions/types';
 import { login } from '../../Actions/userActions';
 import { itemsFetch } from '../../Actions/userActions'
 import { Link } from 'react-router-dom'
+import { Button } from 'semantic-ui-react'
 
 class Login extends React.Component {
   state = {
@@ -36,7 +37,8 @@ class Login extends React.Component {
         const { token, user } = data
         localStorage.setItem('token', token)
         this.props.login(user)
-        this.props.fetchItems()
+        this.props.fetchItems(user)
+        this.props.history.push('/')
       })
   }
 
@@ -48,10 +50,9 @@ class Login extends React.Component {
           <form  onSubmit={this.handleLoginSubmit} className="col s12 m4 offset-m4">
             <div className="card">
               <div className="card-action cyan lighten-2 white-text">
-                <h3>Login Form</h3>
+                <h3>Login</h3>
               </div>
               <div className="card-content">
-              // { !this.props.failedLogin ? null : this.props.error }
                 <div className="form-field">
                   <input onChange={this.handleChange} type='text' name="username" placeholder="Username" value={this.state.username} required autoComplete="off" />
                 </div><br />
@@ -61,9 +62,9 @@ class Login extends React.Component {
                 </div><br />
 
                 <div className="form-field">
-                  <button className="btn-large waves-effect waves-dark cyan lighten-2" type="submit" style={{width: '100%', fontFamily: 'Hammersmith One, sans-serif'}}>
+                  <Button type="submit" style={{width: '100%', fontFamily: 'Hammersmith One, sans-serif'}}>
                     Login
-                  </button>
+                  </Button>
                 </div>
 
               </div>

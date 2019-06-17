@@ -106,3 +106,10 @@ export const autoLogin = (user) => {
     payload: user
   }
 }
+
+export function LogoutAction() {
+  localStorage.clear();
+  return {
+    type: UNAUTHENTICATED
+  };
+}

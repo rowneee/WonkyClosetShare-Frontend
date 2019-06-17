@@ -1,7 +1,8 @@
 import {
   LOGIN,
   LOGOUT,
-  SIGNUP
+  SIGNUP,
+  SET_CURRENT_USER
 } from "../Actions/types";
 
 const initialState = {

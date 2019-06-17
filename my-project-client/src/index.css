@@ -16,7 +16,8 @@ code {
   padding-top: 0;
 }
 
-.cards-list {
+.card-list {
+  margin-left: 50px;
   z-index: 0;
   width: 100%;
   display: flex;
@@ -36,7 +37,7 @@ code {
 
 /* On mouse-over, add a deeper shadow */
 .card:hover {
-  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 8px 4px 0 rgba(0,0,0,0.2);
 }
 
 /* Add some padding inside the card container */
@@ -112,19 +113,23 @@ code {
 /* Navbar container */
 .navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #cce6ff;
   font-family: Arial;
-  height: 75px;
+  height: 70px;
+  /* padding-top: 10px; */
+
 }
 
 /* Links inside the navbar */
 .navbar a {
-  float: left;
+  /* float: left; */
   font-size: 16px;
-  color: white;
   text-align: center;
-  padding: 14px 16px;
+  /* padding: 14px 16px; */
   text-decoration: none;
+  /* background: #f4f1e5; */
+  color: #544738;
+  font-family: helvetica, sans-serif;
 }
 
 /* The dropdown container */
@@ -138,10 +143,14 @@ code {
   font-size: 16px;
   border: none;
   outline: none;
-  color: white;
-  padding: 14px 16px;
+  color: #544738;
+  padding: 2px 2px;
   background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
+  /* src: url('kulminoituva-webfont.eot'); */
+  /* src: local('‚ò∫'), url('kulminoituva-webfont.woff') format('woff'), url('kulminoituva-webfont.ttf') format('truetype'), url('kulminoituva-webfont.svg#webfontHNAi9IoX') format('svg'); */
+  font-weight: normal;
+  font-style: normal;
+/* Important for vertical align on mobile phones */
   margin: 0; /* Important for vertical align on mobile phones */
 }
 
@@ -149,6 +158,25 @@ code {
 .navbar a:hover, .dropdown:hover .dropbtn {
   background-color: red;
 }
+
+.item {
+  list-style: none;
+  margin-right: 1em;
+  font-family: 'Lobster';
+  font-size: 25px;
+  padding: 6px 0 0 20px;
+}
+
+.right-icon {
+  float: right;
+}
+
+.home-icon {
+  font-family: 'Faster One';
+  font-size: 40px;
+}
+
+
 
 /* Dropdown content (hidden by default) */
 .dropdown-content {
@@ -182,4 +210,20 @@ code {
 
 .container {
   padding: 0;
+}
+
+.auth {
+  float: right;
+}
+
+.home-items {
+  flex: auto;
+  height: 500px;
+  width: 800px;
+}
+
+.my-closet-title {
+  font-size: 50px;
+  font-family: 'Gloria Hallelujah';
+  padding-top: 2%;
 }

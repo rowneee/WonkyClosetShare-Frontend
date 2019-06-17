@@ -2,7 +2,9 @@ import axios from 'axios';
 
 import {
   login,
+  setCurrentUser,
   logout,
+  LogoutAction,
   signup
 } from './userActions'
 
@@ -29,12 +31,6 @@ import {
 //   };
 // }
 //
-// export function signOutAction() {
-//   localStorage.clear();
-//   return {
-//     type: UNAUTHENTICATED
-//   };
-// }
 
 export {
   login,

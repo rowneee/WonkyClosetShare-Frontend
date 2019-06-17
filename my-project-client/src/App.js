@@ -8,9 +8,10 @@ import { login, autoLogin, itemsFetch } from './Actions/userActions'
 import NavBar from './Nav/NavBar'
 import HomePage from './Home/HomePage'
 import MyProfile from './Profile/MyProfile'
+import Notifications from './Profile/Notifications'
 import Login from './Components/auth/Login'
 import SignUp from './Components/auth/signup'
-// import SignOut from './Components/auth/signout'
+import Logout from './Components/auth/logout'
 import DiscoverPage from './Discover/DiscoverPage'
 import { Container} from 'semantic-ui-react'
 import { BrowserRouter as Router, Route, withRouter, Switch } from 'react-router-dom';
@@ -18,7 +19,6 @@ import { connect } from 'react-redux'
 
 import requireAuth from './Components/auth/require_auth';
 import noRequireAuth from './Components/auth/no_require_auth';
-// <Route path="/signout" component={requireAuth(SignOut)} />
 // <Route path="/secret" component={requireAuth(SecretPage)} />
 class App extends React.Component {
 
@@ -31,7 +31,8 @@ class App extends React.Component {
     myItems: [],
     borrowedItems: [],
     borrowed: false,
-    current_user: {}
+    currentUser: {},
+    notifications: []
   }
 
   componentDidMount() {
@@ -50,11 +51,11 @@ class App extends React.Component {
       .then(data => {
         // dispatch the logged in user
         // data or data.user {id: 1, name: 'hi'}
-        this.setState({current_user: data})
+        this.setState({currentUser: data})
         console.log("ive reached", data)
         this.props.autoLogin(data)
-        this.fetchItems(this.state.current_user)
-        // if the item's owner_id matches the current_user id then add to myItems
+        this.fetchItems(this.state.currentUser)
+        // if the item's owner_id matches the currentUser id then add to myItems
 
         // this.props.history.push()
         // dispatch to redux, that sets the current user in the redux store
@@ -63,17 +64,27 @@ class App extends React.Component {
     }
     // else {
     // console.log("else", data);
-    //   this.setState({current_user: data.user})
+    //   this.setState({currentUser: data.user})
     // //   //it the localstorage has the token
     // //   //set state to current user
     // }
+  }
+
+  addNotification = (itemId) => {
+    const requestedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
+    this.setState({notifications: requestedItems})
   }
 
   borrowItem = (itemId) => {
     console.log("whatAMI", itemId);
     const itemsWithRemove = this.state.items.filter(item => item.id !== itemId)
     const updatedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
+
     this.setState({items: itemsWithRemove, borrowedItems: updatedItems})
+  }
+
+  acceptBorrow = () => {
+
   }
 
   returnItem = (itemId) => {
@@ -101,21 +112,21 @@ class App extends React.Component {
     this.setState({search: value})
   }
 
-  fetchItems = (current_user) => {
-    console.log("im da user", current_user);
-    console.log("user id type:", typeof(current_user.id));
+  fetchItems = (currentUser) => {
+    console.log("im da user", currentUser);
+    console.log("user id type:", typeof(currentUser.id));
     const token = localStorage.getItem('token')
     fetch("http://localhost:3000/api/v1/items", {
       headers: {
         Authorization: `${token}`
       }
     })
-    .then(resp => resp.json())
+    .then(r => r.json())
     .then(data => {
       console.log("fdgfe", data)
       this.setState({
         items: data,
-        myItems: data.filter(item => item.owner_id === current_user.id),
+        myItems: data.filter(item => item.owner_id === currentUser.id),
         tops: data.filter(item => item.category === "Tops"),
         bottoms: data.filter(item => item.category === "Bottoms"),
         shoes: data.filter(item => item.category === "Shoes"),
@@ -133,12 +144,12 @@ class App extends React.Component {
           images={{
             0: "https://scubasanmateo.com/images/cotton-clipart-animated-10.png",
             1: "http://gifgifs.com/animations/clothing/mens-clothes/Warm_pants.gif",
-            2: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRRS_mAUOzLcsEBugXhHixyvcJn16LRvsYOYCmY7JfHzuzVi1dhCA"
+            2: "https://bankkita.com/images1280_/orange-clipart-shoes-3.jpg"
           }}
           how={130}
           time={40}
           size={'50px'}
-          background={'blue'}
+          background={'#99ccff'}
         />
 
       <div className="container">
@@ -153,6 +164,8 @@ class App extends React.Component {
                 borrowItem={this.borrowItem}
                 isBorrowed={this.isBorrowed}
                 onChosenItem={this.handleChosenItem}
+                addNotification={this.addNotification}
+                currentUser={this.state.currentUser}
                 />}
               />
             <Route exact path="/profile" render={(props)=> <MyProfile {...props}
@@ -166,6 +179,13 @@ class App extends React.Component {
                 isBorrowed={isBorrowed}
                 />}
               />
+            <Route exact path="/notification" render={(props)=> <Notifications {...props}
+              notifications={this.notifications}
+              />}
+            />
+            <Route exact path="/logout" render={(props)=> <Logout {...props}
+              />}
+            />
             </div>
             <div>
               <Route exact path="/login" render={props => <Login {...props} fetchItems={this.fetchItems}/>} />
