@@ -54,8 +54,8 @@ class App extends React.Component {
         this.setState({currentUser: data})
         this.props.autoLogin(data)
         this.fetchItems(this.state.currentUser)
-        this.getNotifications(this.state.currentUser)
         // if the item's owner_id matches the currentUser id then add to myItems
+        this.getNotifications(this.state.currentUser)
 
         // this.props.history.push()
         // dispatch to redux, that sets the current user in the redux store
@@ -81,17 +81,22 @@ class App extends React.Component {
 }
 
   getNotifications = currentUser => {
+    console.log('tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt');
     const token = localStorage.getItem('token')
+    console.log("uza id", currentUser.id);
     fetch(`http://localhost:3000/api/v1/users/${currentUser.id}/pending_items`, {
       headers: {
-        Authorization: `${token}`
+        "Content-Type": 'application/json',
+        "Authorization": `${token}`
       }
     })
     .then(r => r.json())
     .then(data => {
-      console.log("get noti", data);
+      console.log("get noti*****************************", data);
       // debugger
       this.setState({pendingItems: data})
+      console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
+
     })
   }
 

@@ -54,8 +54,8 @@ class AddToCloset extends React.Component {
                 <Button onClick={this.handleClose} color="primary">
                   Disagree
                 </Button>
-                <Button onClick={()=>this.props.requestToBorrowItem(this.props.item.id)} onClick={this.handleClose} color="primary" autoFocus>
-                  Agree
+                <Button onClick={()=>this.props.requestToBorrowItem(this.props.item.id)} color="primary" autoFocus>
+                  Request
                 </Button>
               </DialogActions>
             </Dialog>
