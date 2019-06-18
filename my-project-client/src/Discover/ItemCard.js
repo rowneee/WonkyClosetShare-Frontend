@@ -1,5 +1,5 @@
   import React from 'react';
-import { Button, Card, Image } from 'semantic-ui-react'
+import { Button, Card, Image, Icon } from 'semantic-ui-react'
 import AddToCloset from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Discover/AddtoCloset.js'
 import {Animated} from "react-animated-css"
 
@@ -62,7 +62,11 @@ class ItemCard extends React.Component{
   }
 
   toggleDetails = () => {
-    this.setState({details: !this.state.details})
+    this.setState({details: true})
+  }
+
+  turnOffDetails = () => {
+    this.setState({details: false})
   }
 
   render() {
@@ -70,23 +74,30 @@ class ItemCard extends React.Component{
     if (this.state.details === false) {
       return (
     <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
-    <div className="card-list">
-      <div class="card" onClick={this.toggleDetails}>
-        <img src={this.props.item.img_url} alt="item-image" className="card-image"/>
-        <div class="container">
-          <h4><b>{this.props.item.name}</b></h4>
-          <p>{this.props.item.description}</p>
-        </div>
-      </div>
-    </div>
+      <Card onClick={this.toggleDetails}>
+        <Image src={this.props.item.img_url} wrapped ui={false} />
+        <Card.Content>
+          <Card.Header>{this.props.item.name}</Card.Header>
+          <Card.Meta>{this.props.item.brand}</Card.Meta>
+          <Card.Description>
+            {this.props.item.description}
+          </Card.Description>
+        </Card.Content>
+        <Card.Content extra>
+          <a>
+            <Icon name='eye' />
+            Status {this.props.item.status}
+          </a>
+        </Card.Content>
+      </Card>
     </Animated>
   )}
   else if (this.state.details === true) {
     return (
       <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
-      <div className="card-list">
-          <div class="card" onClick={this.toggleDetails}>
-            <div class="container">
+        <Card onClick={this.turnOffDetails} className="card">
+          <Image src={this.props.item.img_url} wrapped ui={false} height="100" width="100"/>
+          <Card.Content>
               <h4><b>{this.props.item.name}</b></h4>
               <p>Request To Borrow</p>
               <div>
@@ -98,9 +109,13 @@ class ItemCard extends React.Component{
                   addNotification={this.props.addNotification}
                 />
               </div>
-            </div>
-          </div>
-      </div>
+            <Card.Header>{this.props.item.name}</Card.Header>
+          <Card.Meta>{this.props.item.brand}</Card.Meta>
+        <Card.Description>
+          {this.props.item.description}
+        </Card.Description>
+        </Card.Content>
+      </Card>
       </Animated>
       )
     }
