@@ -11,8 +11,9 @@ class AddToCloset extends React.Component {
           key={this.props.item.id}
           text={this.props.item.name}
           onClick={()=>this.props.requestToBorrowItem(this.props.item.id)}
+          onClick={this.props.turnOffDetails}
          >
-         Borrow
+         Request To Borrow
         </Button>
         </div>
       )

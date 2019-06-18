@@ -32,7 +32,7 @@ class App extends React.Component {
     borrowedItems: [],
     borrowed: false,
     currentUser: {},
-    notifications: []
+    pendingItems: []
   }
 
   componentDidMount() {
@@ -70,10 +70,10 @@ class App extends React.Component {
     // }
   }
 
-  addNotification = (itemId) => {
-    const requestedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
-    this.setState({notifications: requestedItems})
-  }
+  // addNotification = (itemId) => {
+  //   const requestedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
+  //   this.setState({pendingItems: requestedItems})
+  // }
 
   getNotifications = currentUser => {
     const token = localStorage.getItem('token')
@@ -84,8 +84,9 @@ class App extends React.Component {
     })
     .then(r => r.json())
     .then(data => {
+      console.log("get noti", data);
       // debugger
-      // this.setState(pendingItems: )
+      this.setState({pendingItems: data})
     })
   }
 
@@ -145,6 +146,7 @@ class App extends React.Component {
   }
 
   render() {
+    console.log("pending", this.state.pendingItems);
     const isBorrowed = this.state.items.filter(item => item.borrowed)
     return (
       <div>
@@ -188,7 +190,7 @@ class App extends React.Component {
                 />}
               />
             <Route exact path="/notification" render={(props)=> <Notifications {...props}
-              notifications={this.notifications}
+              pendingItems={this.state.pendingItems}
               />}
             />
             <Route exact path="/logout" render={(props)=> <Logout {...props}

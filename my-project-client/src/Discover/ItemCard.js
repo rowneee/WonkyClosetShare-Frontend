@@ -75,15 +75,15 @@ class ItemCard extends React.Component{
   }
 
   render() {
-    console.log(this.props);
+    console.log("itemmmm", this.props.item);
     if (this.state.details === false) {
       return (
     <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true} style={{padding: "18px", color: "blue"}}>
       <Card onClick={this.toggleDetails} >
         <Image src={this.props.item.img_url} wrapped ui={false} />
         <Card.Content>
-          <Card.Header>{this.props.item.name}</Card.Header>
-          <Card.Meta>{this.props.item.brand}</Card.Meta>
+          <Card.Header>{this.props.item.brand}</Card.Header>
+          <Card.Meta>owner: {this.props.item.owner.username}</Card.Meta>
           <Card.Description>
             {this.props.item.description}
           </Card.Description>
@@ -104,7 +104,6 @@ class ItemCard extends React.Component{
           <Image src={this.props.item.img_url} wrapped ui={false} height="100" width="100"/>
           <Card.Content>
               <h4><b>{this.props.item.name}</b></h4>
-              <p>Request To Borrow</p>
               <div>
                 <AddToCloset
                   item={this.props.item}
@@ -112,6 +111,7 @@ class ItemCard extends React.Component{
                   requestToBorrowItem={this.requestToBorrowItem}
                   handleClick={this.props.handleClick}
                   addNotification={this.props.addNotification}
+                  turnOffDetails={this.turnOffDetails}
                 />
               <Modal trigger={<Button onClick={this.showModal} onClose={this.turnOffDetails}>Show Modal</Button>}>
                   <Modal.Header>{this.props.item.brand}</Modal.Header>

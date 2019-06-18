@@ -1,9 +1,7 @@
 import React from 'react'
+// import ItemCard from '../Discover/ItemCard'
 
 class Notifications extends React.Component {
-  state = {
-    pendingItems: []
-  }
 
   // componentDidMount() {
   //   const token = localStorage.getItem('token')
@@ -22,7 +20,7 @@ class Notifications extends React.Component {
   render() {
     return(
       <>
-
+      {this.props.pendingItems}
       </>
     )
   }
