@@ -12,7 +12,7 @@ class MyProfile extends React.Component {
     return (
       <div>
         <center>
-          <Animated animationIn="bounceInDown" animationOut="fadeOut" isVisible={true}>
+          <Animated animationIn="wobble" animationOut="fadeOut" isVisible={true}>
             <div className="my-closet-title">
                 MY CLOSET
             </div>

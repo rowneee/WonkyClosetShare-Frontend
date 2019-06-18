@@ -16,7 +16,6 @@ const initialState = {
 // {auth: {}, user: {user: }}
 
 const usersReducer = (state = initialState, action) => {
-  console.log('USERSREDUCER IS CALLED w action: ', action)
   switch (action.type) {
     case LOGIN:
       return {

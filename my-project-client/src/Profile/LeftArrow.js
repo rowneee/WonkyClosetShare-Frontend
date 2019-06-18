@@ -5,7 +5,7 @@ const LeftArrow = (props) => {
   return (
     <div className="backArrow">
       <button class="ui circular icon button" onClick={props.goToPrevSlide}>
-        <i aria-hidden="true" class="left arrow icon"></i>
+        <i aria-hidden="true" class="left arrow icon red"></i>
       </button>
     </div>
   );

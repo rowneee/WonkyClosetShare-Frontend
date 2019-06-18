@@ -52,9 +52,9 @@ class App extends React.Component {
         // dispatch the logged in user
         // data or data.user {id: 1, name: 'hi'}
         this.setState({currentUser: data})
-        console.log("ive reached", data)
         this.props.autoLogin(data)
         this.fetchItems(this.state.currentUser)
+        this.getNotifications(this.state.currentUser)
         // if the item's owner_id matches the currentUser id then add to myItems
 
         // this.props.history.push()
@@ -75,8 +75,21 @@ class App extends React.Component {
     this.setState({notifications: requestedItems})
   }
 
+  getNotifications = currentUser => {
+    const token = localStorage.getItem('token')
+    fetch(`http://localhost:3000/api/v1/users/${currentUser.id}/pending_items`, {
+      headers: {
+        Authorization: `${token}`
+      }
+    })
+    .then(r => r.json())
+    .then(data => {
+      // debugger
+      // this.setState(pendingItems: )
+    })
+  }
+
   borrowItem = (itemId) => {
-    console.log("whatAMI", itemId);
     const itemsWithRemove = this.state.items.filter(item => item.id !== itemId)
     const updatedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
 
@@ -88,7 +101,6 @@ class App extends React.Component {
   }
 
   returnItem = (itemId) => {
-    console.log("return item??", itemId);
     const removedFromMyCloset = this.state.borrowedItems.filter(item=>item.id!==itemId)
     const updatedItems = this.state.items.filter(item=>item.id===itemId)
     this.setState({items: updatedItems, borrowedItems: removedFromMyCloset})
@@ -113,8 +125,6 @@ class App extends React.Component {
   }
 
   fetchItems = (currentUser) => {
-    console.log("im da user", currentUser);
-    console.log("user id type:", typeof(currentUser.id));
     const token = localStorage.getItem('token')
     fetch("http://localhost:3000/api/v1/items", {
       headers: {
@@ -123,7 +133,6 @@ class App extends React.Component {
     })
     .then(r => r.json())
     .then(data => {
-      console.log("fdgfe", data)
       this.setState({
         items: data,
         myItems: data.filter(item => item.owner_id === currentUser.id),
@@ -136,7 +145,6 @@ class App extends React.Component {
   }
 
   render() {
-    console.log("im here", this.state);
     const isBorrowed = this.state.items.filter(item => item.borrowed)
     return (
       <div>
@@ -198,7 +206,6 @@ class App extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log('WHAT DOES OUR INITIAL STATE NOW LOOK LIKE', state)
   return {
     isLoggedIn: !!state.user.user,
     user: state.user

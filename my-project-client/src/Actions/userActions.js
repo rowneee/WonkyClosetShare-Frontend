@@ -80,6 +80,7 @@ export const signup = (username, password) => {
       .then(res => res.json())
 	    .then(res => {
 		    localStorage.setItem('jwt', res.jwt)
+        console.log('here', res.jwt)
 		    dispatch({ type: SIGNUP, payload: res.user})
 	     })
 	}

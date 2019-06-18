@@ -78,8 +78,8 @@ class ItemCard extends React.Component{
     console.log(this.props);
     if (this.state.details === false) {
       return (
-    <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
-      <Card onClick={this.toggleDetails}>
+    <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true} style={{padding: "18px", color: "blue"}}>
+      <Card onClick={this.toggleDetails} >
         <Image src={this.props.item.img_url} wrapped ui={false} />
         <Card.Content>
           <Card.Header>{this.props.item.name}</Card.Header>
@@ -100,7 +100,7 @@ class ItemCard extends React.Component{
   else if (this.state.details === true) {
     return (
       <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
-        <Card className="card">
+        <Card >
           <Image src={this.props.item.img_url} wrapped ui={false} height="100" width="100"/>
           <Card.Content>
               <h4><b>{this.props.item.name}</b></h4>
@@ -118,7 +118,6 @@ class ItemCard extends React.Component{
                   <Modal.Content image>
                     <Image wrapped size='medium' src={this.props.item.img_url} />
                     <Modal.Description>
-                      
                       <p>Size: {this.props.item.size}</p>
                       <p>Color: {this.props.item.color}</p>
                       <p>About: {this.props.item.description}</p>

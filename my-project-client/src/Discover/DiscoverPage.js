@@ -87,7 +87,6 @@ class DiscoverPage extends Component {
   }
 
   render() {
-    console.log("Disc", this.props);
     return (
       <div className="container">
         <center>

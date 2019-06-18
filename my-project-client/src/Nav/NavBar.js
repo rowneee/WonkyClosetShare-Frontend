@@ -46,7 +46,6 @@ class NavBar extends React.Component {
                 </IconButton>
                 <div className="dropdown-content">
                   <a href="#">Find Some Clothes</a>
-                  <a href="#">Currently Borrowing</a>
                   <a href="#">Explore</a>
                 </div>
               </div>
@@ -89,7 +88,7 @@ class NavBar extends React.Component {
                       <Link to="/logout">
                         Logout
                       </Link>
-                      <a href="#">Currently Borrowing</a>
+
                     </div>
                   </div>
                 </div>

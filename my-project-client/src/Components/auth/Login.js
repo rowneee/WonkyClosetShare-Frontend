@@ -33,7 +33,6 @@ class Login extends React.Component {
     })
       .then(r => r.json())
       .then(data => {
-        console.log("login data", data);
         const { token, user } = data
         localStorage.setItem('token', token)
         this.props.login(user)
@@ -43,7 +42,6 @@ class Login extends React.Component {
   }
 
   render() {
-    console.log('LOGIN FORM props: ', this.props)
     return (
       <Fragment>
       <div style={{marginTop: '10%'}} className="row">
