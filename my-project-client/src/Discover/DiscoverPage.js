@@ -88,7 +88,7 @@ class DiscoverPage extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="discover-container">
         <center>
           <Animated animationIn="bounceInDown" animationOut="fadeOut" isVisible={true}>
             <div className="my-closet-title">
@@ -115,7 +115,6 @@ class DiscoverPage extends Component {
           </div>
         </div>
       </div>
-
     )
   }
 

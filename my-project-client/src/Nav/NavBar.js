@@ -26,7 +26,7 @@ class NavBar extends React.Component {
                     to="/">
                     <h2 className="ui header">
                       <div className="content">
-                        <h2 className="home-icon">
+                        <h2 className="home-icon" style={{color:"white"}}>
                           WoNkY
                         </h2>
                       </div>
@@ -62,13 +62,13 @@ class NavBar extends React.Component {
                     </div>
                   </IconButton>
                 </div>
-                <div className="dropdown">
+                <div className="dropdown" style={{float: "right", marginTop: "14px", marginLeft: "5px"}}>
                   <IconButton className="dropbtn">
                     <div>
                       <h3 key="Notification" className="auth">
                         <Link to="/notifications">
                           <a>
-                            <Icon name='bell outline' />
+                            <Icon name='bell outline' style={{color:"red"}}/>
                           </a>
                         </Link>
                       </h3>
@@ -76,11 +76,11 @@ class NavBar extends React.Component {
                   </IconButton>
                 </div>
                 <div>
-                  <div className="dropdown right-icon">
+                  <div className="dropdown right-icon" style={{float: "right"}}>
                     <IconButton className="dropbtn">
-                      <div className="item">
+                      <div className="item right-item">
                         <Link to="/profile">
-                            <Icon name="user icon" size="large"/>
+                            <Icon name="user icon" size="large" style={{color:"white"}}/>
                         </Link>
                       </div>
                     </IconButton>

@@ -2,7 +2,7 @@ import React from 'react'
 import { Card, Button } from 'semantic-ui-react'
 import SliderContainer from './SliderContainer'
 import MyItems from './MyItems'
-import NewItemForm from './NewItemForm'
+import NewItem from './NewItem'
 import {Animated} from "react-animated-css"
 
 class MyProfile extends React.Component {
@@ -14,14 +14,14 @@ class MyProfile extends React.Component {
         <center>
           <Animated animationIn="wobble" animationOut="fadeOut" isVisible={true}>
             <div className="my-closet-title">
-                MY CLOSET
+                {this.props.currentUser.username}s closet
             </div>
           </Animated>
         </center>
         <center>
           <br />
           <br />
-          <NewItemForm />
+          <NewItem handleSubmitNewItem={this.props.handleSubmitNewItem} />
         </center>
         <SliderContainer
           items={this.props.items}

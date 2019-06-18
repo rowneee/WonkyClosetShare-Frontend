@@ -8,7 +8,7 @@ import { login, autoLogin, itemsFetch } from './Actions/userActions'
 import NavBar from './Nav/NavBar'
 import HomePage from './Home/HomePage'
 import MyProfile from './Profile/MyProfile'
-import Notifications from './Profile/Notifications'
+import Notifications from './Notifications'
 import Login from './Components/auth/Login'
 import SignUp from './Components/auth/signup'
 import Logout from './Components/auth/logout'
@@ -75,6 +75,11 @@ class App extends React.Component {
   //   this.setState({pendingItems: requestedItems})
   // }
 
+  handleSubmitNewItem = item => {
+  console.log("da item", item)
+    this.setState({myItems: [...this.state.myItems, item], items: [...this.state.items, item] })
+}
+
   getNotifications = currentUser => {
     const token = localStorage.getItem('token')
     fetch(`http://localhost:3000/api/v1/users/${currentUser.id}/pending_items`, {
@@ -91,14 +96,10 @@ class App extends React.Component {
   }
 
   borrowItem = (itemId) => {
-    const itemsWithRemove = this.state.items.filter(item => item.id !== itemId)
+    // const itemsWithRemove = this.state.items.filter(item => item.id !== itemId)
     const updatedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
 
-    this.setState({items: itemsWithRemove, borrowedItems: updatedItems})
-  }
-
-  acceptBorrow = () => {
-
+    this.setState({borrowedItems: updatedItems})
   }
 
   returnItem = (itemId) => {
@@ -187,9 +188,10 @@ class App extends React.Component {
                 bottoms={this.state.bottoms}
                 shoes={this.state.shoes}
                 isBorrowed={isBorrowed}
+                currentUser={this.state.currentUser}
                 />}
               />
-            <Route exact path="/notification" render={(props)=> <Notifications {...props}
+            <Route exact path="/notifications" render={(props)=> <Notifications {...props}
               pendingItems={this.state.pendingItems}
               />}
             />
