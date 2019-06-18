@@ -63,12 +63,18 @@ class NavBar extends React.Component {
                     </div>
                   </IconButton>
                 </div>
-                <div>
-                  <h3 key="Notification" className="auth">
-                    <Link to="/notifications">
-                      Notifications
-                    </Link>
-                  </h3>
+                <div className="dropdown">
+                  <IconButton className="dropbtn">
+                    <div>
+                      <h3 key="Notification" className="auth">
+                        <Link to="/notifications">
+                          <a>
+                            <Icon name='bell outline' />
+                          </a>
+                        </Link>
+                      </h3>
+                    </div>
+                  </IconButton>
                 </div>
                 <div>
                   <div className="dropdown right-icon">

@@ -99,6 +99,7 @@ class DiscoverPage extends Component {
         </center>
         <div className="ui five column grid">
           <div className="row card-row">
+            <Card.Group>
             {this.props.items.map(item => {
               return <ItemCard
                 item={item}
@@ -111,6 +112,7 @@ class DiscoverPage extends Component {
                 currentUser={this.props.currentUser}
                 />
             })}
+          </Card.Group>
           </div>
         </div>
       </div>

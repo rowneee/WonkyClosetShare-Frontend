@@ -1,12 +1,13 @@
   import React from 'react';
-import { Button, Card, Image, Icon } from 'semantic-ui-react'
+import { Button, Card, Image, Icon, Modal, Header } from 'semantic-ui-react'
 import AddToCloset from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Discover/AddtoCloset.js'
 import {Animated} from "react-animated-css"
 
 class ItemCard extends React.Component{
 
   state = {
-    details: false
+    details: false,
+    openModal: false
   }
 
   // handleDelete = songId => {
@@ -69,6 +70,10 @@ class ItemCard extends React.Component{
     this.setState({details: false})
   }
 
+  showModal = () => {
+    this.setState({openModal: true})
+  }
+
   render() {
     console.log(this.props);
     if (this.state.details === false) {
@@ -95,7 +100,7 @@ class ItemCard extends React.Component{
   else if (this.state.details === true) {
     return (
       <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
-        <Card onClick={this.turnOffDetails} className="card">
+        <Card className="card">
           <Image src={this.props.item.img_url} wrapped ui={false} height="100" width="100"/>
           <Card.Content>
               <h4><b>{this.props.item.name}</b></h4>
@@ -108,6 +113,18 @@ class ItemCard extends React.Component{
                   handleClick={this.props.handleClick}
                   addNotification={this.props.addNotification}
                 />
+              <Modal trigger={<Button onClick={this.showModal} onClose={this.turnOffDetails}>Show Modal</Button>}>
+                  <Modal.Header>{this.props.item.brand}</Modal.Header>
+                  <Modal.Content image>
+                    <Image wrapped size='medium' src={this.props.item.img_url} />
+                    <Modal.Description>
+                      
+                      <p>Size: {this.props.item.size}</p>
+                      <p>Color: {this.props.item.color}</p>
+                      <p>About: {this.props.item.description}</p>
+                    </Modal.Description>
+                  </Modal.Content>
+                </Modal>
               </div>
             <Card.Header>{this.props.item.name}</Card.Header>
           <Card.Meta>{this.props.item.brand}</Card.Meta>
