@@ -1,14 +1,17 @@
 import React from 'react'
-import { Button, Checkbox, Form, Modal } from 'semantic-ui-react'
+import { Checkbox, Form, Modal } from 'semantic-ui-react'
+import Button from '@material-ui/core/Button';
 
 export default class NewItemForm extends React.Component {
 
 
 state = {
-  item_name: '',
-  item_color: '',
-  manufacturer: '',
-  image_url: ''
+  itemBrand: '',
+  itemColor: '',
+  itemSize: '',
+  itemDescription: '',
+  itemCategory: '',
+  itemIMG: ''
 }
 
 
@@ -28,10 +31,13 @@ handleSubmit = event => {
       Accept: 'application/json'
     },
     body: JSON.stringify({
-      item_name: this.state.item_name,
-      item_color: this.state.item_color,
-      manufacturer: this.state.manufacturer,
-      image_url: this.state.image_url
+      itemBrand: this.state.itemBrand,
+      itemColor: this.state.itemColor,
+      itemSize: this.state.itemSize,
+      itemDescription: this.state.itemDescription,
+      itemCategory: this.state.itemCategory,
+      itemIMG: this.state.itemIMG,
+      status: "Not Borrowed"
     })
   })
     .then(resp => resp.json())
@@ -39,6 +45,21 @@ handleSubmit = event => {
       console.log(item)
       this.props.handleSubmitNewItem(item)
     })
+}
+
+openWidget = () => {
+  window.cloudinary.createUploadWidget({
+    cloudName: "wonkycloud",
+    uploadPreset: "knqkvhmh"
+  },
+  (error, result) => {
+    if (result && result.event === "success") {
+      this.setState({
+        image: `https://res.cloudinary.com/${"wonkycloud"}/image/upload/${result.info.path}`, uploaded: true
+      })
+    }
+  }
+).open()
 }
 
 
@@ -49,21 +70,29 @@ render() {
  return (
   <Form onSubmit={this.handleSubmit}>
     <Form.Field>
-      <label>Item Name</label>
-      <input onChange={this.handleChange} name="item_name" value={this.state.item_name} placeholder='Item Name' />
+      <label>Item Brand</label>
+      <input onChange={this.handleChange} name="item_name" placeholder='Brand' />
     </Form.Field>
     <Form.Field>
       <label>Color</label>
-      <input onChange={this.handleChange} name="item_color" value={this.state.item_color}placeholder='Color' />
+      <input onChange={this.handleChange} name="item_color" placeholder='Color' />
     </Form.Field>
     <Form.Field>
-      <label>Manufacturer</label>
-      <input onChange={this.handleChange} name="manufacturer" value={this.state.manufacturer} placeholder='Manufacturer' />
+      <label>Size</label>
+      <input onChange={this.handleChange} name="size" placeholder='Size' />
     </Form.Field>
     <Form.Field>
-      <label>Image URL</label>
-      <input onChange={this.handleChange} name="image_url" value={this.state.image_url} placeholder='Image URL' />
+      <label>Description</label>
+      <input onChange={this.handleChange} name="description" placeholder='Description' />
     </Form.Field>
+    <Form.Field>
+      <label>category</label>
+      <input onChange={this.handleChange} name="category" placeholder='Category (example: Tops, Bottoms...)' />
+    </Form.Field>
+      <Button onClick={this.openWidget} variant="outlined"
+      color="primary">
+        Add Photo
+      </Button>
     <Form.Field>
       <Checkbox label='I agree to the Terms and Conditions' />
     </Form.Field>

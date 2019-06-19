@@ -11,25 +11,21 @@ export default class SliderContainer extends Component {
       <Animated animationIn="slideInLeft" animationOut="slideOutLeft" isVisible={true}>
         <SliderComponent
           category={this.props.accessories}
-          accessories={this.props.accessories}
         />
       </Animated>
       <Animated animationIn="slideInRight" animationOut="slideOutRight" isVisible={true}>
         <SliderComponent
           category={this.props.tops}
-          tops={this.props.tops}
         />
       </Animated>
       <Animated animationIn="slideInLeft" animationOut="slideOutLeft" isVisible={true}>
         <SliderComponent
           category={this.props.bottoms}
-          bottoms={this.props.bottoms}
         />
       </Animated>
       <Animated animationIn="slideInRight" animationOut="slideOutRight" isVisible={true}>
         <SliderComponent
           category={this.props.shoes}
-          shoes={this.props.shoes}
         />
       </Animated>
    </div>

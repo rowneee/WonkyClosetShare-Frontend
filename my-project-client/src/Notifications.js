@@ -24,6 +24,7 @@ class Notifications extends React.Component {
       {this.props.pendingItems.map(item=> {
         console.log("notification item", item);
         return <ItemCard
+          acceptBorrow={this.props.acceptBorrow}
           item={item}
           />
       })}

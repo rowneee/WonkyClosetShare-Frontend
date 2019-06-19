@@ -1,28 +1,82 @@
 import React from 'react'
 import SampleClothes from './SampleClothes'
 
+
 class HomePage extends React.Component {
-  state = {
-    myVid: "Clueless.mp4"
-  }
+
   render() {
     console.log("HOME", this.props);
     return (
-      <div>
-      <div class="banner">
-        <div class="banner__background">
-          <iframe width="1400" height="800" src="https://www.youtube.com/embed/XNDubWJU0aU?autoplay=1&loop=1&playlist=Rz-GP7uU0Fc&playsinline=1&disablekb=1&hd=1&vq=720" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-            <div class="video-placeholder" style={{backgroundImage: `url(require("/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/images/maxresdefault.jpg"))`}}></div>
+      <div className="home">
+        <div className="home-screen-card">
+          <div className="home-screen-card-topbar">
+            <div className="home-button">
+              <p className="home-button-x">
+                x
+              </p>
+            </div>
+            <div className="home-button">
+              <p className="home-button-o">
+              []
+              </p>
+            </div>
+            <div className="home-button">
+              <p className="home-button_-">
+                -
+              </p>
+            </div>
+            <div className="top-url">
+              <p className="top-url-text">
+              www.myspace.com/tom - Microsoft Internet Explorer
+              </p>
+            </div>
           </div>
-        <div class="banner__content center-box">
-        <div class="center-box__body">
-          <h1 class="txt-title txt-title--banner">WeLCoMe ZaINNYYYY KidZ</h1>
+          <div className="home-screen-card-topbar2">
+            <div className="second-button">
+              <p className="file">
+                File
+              </p>
+            </div>
+            <div className="second-button">
+              <p className="edit">
+                Edit
+              </p>
+            </div>
+            <div className="second-button">
+              <p className="view">
+                View
+              </p>
+            </div>
+            <div className="second-button">
+              <p className="favorites">
+                Favorites
+              </p>
+            </div>
+            <div className="second-button">
+              <p className="tools">
+                Tools
+              </p>
+            </div>
+            <div className="second-button">
+              <p className="help">
+                Help
+              </p>
+            </div>
+          </div>
+          <div className="home-screen-card-topbar3">
+            <div className="second-button">
+              <p className="help">
+                Address
+              </p>
+            </div>
+            <div className="white-box">
+              <p className="myspace-input">
+                http://www.myspace.com/tom
+              </p>
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-    <pre id="window-width"></pre>
-    <pre id="autoplay"></pre>
-    </div>
     )
   }
 

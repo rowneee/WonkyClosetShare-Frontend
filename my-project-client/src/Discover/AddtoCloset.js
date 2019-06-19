@@ -34,7 +34,8 @@ class AddToCloset extends React.Component {
             text={this.props.item.name}
             onClick={this.handleClickOpen}
             variant="outlined"
-            color="primary">
+            color="primary"
+            >
             ReQuEsT tO bOrRow
           </Button>
             <Dialog

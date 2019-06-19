@@ -88,7 +88,7 @@ class DiscoverPage extends Component {
 
   render() {
     return (
-      <div className="discover-container">
+      <div className="discover">
         <center>
           <Animated animationIn="bounceInDown" animationOut="fadeOut" isVisible={true}>
             <div className="my-closet-title">
@@ -96,6 +96,7 @@ class DiscoverPage extends Component {
             </div>
           </Animated>
         </center>
+        <div className="discover-container">
         <div className="ui five column grid">
           <div className="row card-row">
             <Card.Group>
@@ -115,6 +116,7 @@ class DiscoverPage extends Component {
           </Card.Group>
           </div>
         </div>
+      </div>
       </div>
     )
   }

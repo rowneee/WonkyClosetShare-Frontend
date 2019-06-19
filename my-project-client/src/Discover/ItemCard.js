@@ -49,6 +49,7 @@ class ItemCard extends React.Component{
   }
 
   acceptBorrow = itemId => {
+    const token = localStorage.getItem('token')
     const API = `http://localhost:3000/api/v1/items/${itemId}`
     // this.setState({activePlaylist: playlistId})
     //add song to playlist backend
@@ -56,11 +57,16 @@ class ItemCard extends React.Component{
       method: 'PATCH',
       headers:{
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        "Authorization": `${token}`
       },
       body: JSON.stringify({
         status: "Borrowed"
       })
+    })
+    .then(r=>r.json())
+    .then(data => {
+      console.log("hiiii", data);
     })
   }
 
@@ -151,7 +157,7 @@ class ItemCard extends React.Component{
                   closeModal={this.closeModal}
                 />
                 <br />
-              <Modal trigger={<Button onClick={this.showModal} onClose={this.turnOffDetails} variant="outlined"
+              <Modal trigger={<Button onClick={this.showModal} variant="outlined"
               color="primary">MoRe DeTaIlZ</Button>}>
                   <Modal.Header>{this.props.item.brand}</Modal.Header>
                   <Modal.Content image>

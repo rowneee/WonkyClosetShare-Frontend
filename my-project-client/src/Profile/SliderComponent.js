@@ -43,17 +43,6 @@ class SliderComponent extends React.Component {
 
  }
 
-  // currentIndex={this.state.currentIndex}
-  // translateValue={this.state.translateValue}
-  // goToPrevSlide={this.goToPrevSlide}
-  // goToNextSlide={this.goToNextSlide}
-  // items={this.props.items}
-  // borrowedItems={this.props.borrowedItems}
-  // myItems={this.props.myItems}
-  // accessories={this.props.accessories}
-  // tops={this.props.tops}
-  // bottoms={this.props.bottoms}
-  // shoes={this.props.shoes}
   render() {
     return (
       <div>

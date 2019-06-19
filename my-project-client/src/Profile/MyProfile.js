@@ -7,6 +7,10 @@ import {Animated} from "react-animated-css"
 
 class MyProfile extends React.Component {
 
+  sortItems = (category) => {
+    return [...this.props.myItems, ...this.props.borrowedItems].filter(item=>item.category===category)
+  }
+
   render() {
     console.log("profile", this.props);
     return (
@@ -24,13 +28,10 @@ class MyProfile extends React.Component {
           <NewItem handleSubmitNewItem={this.props.handleSubmitNewItem} />
         </center>
         <SliderContainer
-          items={this.props.items}
-          borrowedItems={this.props.borrowedItems}
-          myItems={this.props.myItems}
-          accessories={this.props.accessories}
-          tops={this.props.tops}
-          bottoms={this.props.bottoms}
-          shoes={this.props.shoes}
+          accessories={this.sortItems("Accessories")}
+          tops={this.sortItems("Tops")}
+          bottoms={this.sortItems("Bottoms")}
+          shoes={this.sortItems("Shoes")}
         />
       </div>
     )

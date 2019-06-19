@@ -96,7 +96,7 @@ class App extends React.Component {
   handleSubmitNewItem = item => {
   console.log("da item", item)
     this.setState({myItems: [...this.state.myItems, item], items: [...this.state.items, item] })
-}
+  }
 
   getNotifications = currentUser => {
     console.log('tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt');
@@ -116,6 +116,11 @@ class App extends React.Component {
       console.log('vvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvv');
 
     })
+  }
+
+  receiveAcceptedItem = itemId => {
+    const updatedCloset = this.state.pendingItems.filter(item=> item.id===itemId)
+    this.setState({borrowedItems: updatedCloset})
   }
 
   borrowItem = (itemId) => {
@@ -171,6 +176,7 @@ class App extends React.Component {
 
   render() {
     console.log("pending", this.state.pendingItems);
+    console.log("current user", this.state.currentUser);
     const isBorrowed = this.state.items.filter(item => item.borrowed)
     return (
       <div>
@@ -205,7 +211,7 @@ class App extends React.Component {
               />
             <Route exact path="/profile" render={(props)=> <MyProfile {...props}
                 items={this.state.items}
-                borrowedItems={this.borrowedItems}
+                borrowedItems={this.state.borrowedItems}
                 myItems={this.state.myItems}
                 accessories={this.state.accessories}
                 tops={this.state.tops}
