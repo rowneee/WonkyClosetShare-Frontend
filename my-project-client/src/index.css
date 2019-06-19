@@ -500,7 +500,7 @@ input {
   border: 3px solid grey;
   /* max-width: 500px; */
   width: 300px;
-  height: 300px;
+  height: 350px;
   background-color: #F0F1F1;
   margin: 9px;
   box-shadow: $shadow;
@@ -510,6 +510,7 @@ input {
   width: 300px;
   height: 70%;
   padding: 6px;
+  padding-top: 9%;
 }
 
 .item-card-content {
@@ -521,8 +522,10 @@ input {
 }
 
 .item-card-topbar {
-  height: 6%;
+  height: 20px;
+  width: 294px;
   background-color: blue;
+  position: absolute;
 }
 
 .item-card-topbar-button {
@@ -532,11 +535,25 @@ input {
   width: 5%;
   float: right;
   margin-right: 3%;
-  margin-top: .9%;
+  margin-top: 1.1%;
+  /* position: absolute; */
+}
+.item-card-topbar-button2 {
+  background-color: #B7B8B8;
+  padding-left: 1.5%;
+  height: 70%;
+  width: 5%;
+  float: right;
+  margin-right: 4%;
+  margin-top: 1.1%;
+  /* position: absolute; */
 }
 
 .button-x {
-  height: 40px;
+  /* float: right; */
+  position: relative;
+  height: 80%;
+  width: 100%;
 }
 
 .borrow-button {

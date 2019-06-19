@@ -109,6 +109,11 @@ class ItemCard extends React.Component{
               x
             </p>
           </div>
+          <div className="item-card-topbar-button2">
+            <p className="button-2">
+              -
+            </p>
+          </div>
         </div>
         <Image className="item-card-image" src={this.props.item.img_url} />
         <div className="item-card-content">
