@@ -8,7 +8,10 @@ class Logout extends React.Component {
    componentWillMount () {
       this.props.dispatch(LogoutAction());
       this.props.history.push('/login')
+      this.props.resetState()
    }
+
+
 
    render () {
        return null;

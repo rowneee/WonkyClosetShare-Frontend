@@ -4,7 +4,7 @@ import { LOGIN } from '../../Actions/types';
 import { login } from '../../Actions/userActions';
 import { itemsFetch } from '../../Actions/userActions'
 import { Link } from 'react-router-dom'
-import { Button } from 'semantic-ui-react'
+import { Button, Card } from 'semantic-ui-react'
 
 class Login extends React.Component {
   state = {
@@ -37,6 +37,7 @@ class Login extends React.Component {
         localStorage.setItem('token', token)
         this.props.login(user)
         this.props.fetchItems(user)
+        this.props.getNotifications(user)
         this.props.history.push('/')
       })
   }
@@ -44,33 +45,36 @@ class Login extends React.Component {
   render() {
     return (
       <Fragment>
+
       <div style={{marginTop: '10%'}} className="row">
           <form  onSubmit={this.handleLoginSubmit} className="col s12 m4 offset-m4">
-            <div className="card">
-              <div className="card-action cyan lighten-2 white-text">
-                <h3>Login</h3>
+            <div className="login-card">
+              <div className="login-header">
+                <h3 className="login-title">LoGIN</h3>
               </div>
-              <div className="card-content">
-                <div className="form-field">
+              <div className="login-body">
+                <div className="form-field login-body__email">
                   <input onChange={this.handleChange} type='text' name="username" placeholder="Username" value={this.state.username} required autoComplete="off" />
                 </div><br />
 
-                <div className="form-field">
+              <div className="form-field login-body__email">
                   <input onChange={this.handleChange} type='password' name="password" placeholder="Password" value={this.state.password} required autoComplete="off" />
                 </div><br />
 
-                <div className="form-field">
-                  <Button type="submit" style={{width: '100%', fontFamily: 'Hammersmith One, sans-serif'}}>
-                    Login
-                  </Button>
+              <div className="form-field login-body__email">
+                  <button className="login-body__submit" type="submit" style={{fontFamily: 'Hammersmith One, sans-serif'}}>
+                    <p className="submit-button">
+                    suBmIT
+                    </p>
+                  </button>
                 </div>
-
+                <p className="first-time">
+                  First time here? <Link to="/signup">Sign Up</Link>
+                </p>
               </div>
-
             </div>
           </form>
         </div>
-            First time here? <Link to="/signup">Sign Up</Link>
       </Fragment>
     )
   }

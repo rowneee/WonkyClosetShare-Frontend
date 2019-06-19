@@ -109,6 +109,7 @@ class DiscoverPage extends Component {
                 handleClick={this.handleClick}
                 addNotification={this.props.addNotification}
                 currentUser={this.props.currentUser}
+                status={this.props.status}
                 />
             })}
           </Card.Group>

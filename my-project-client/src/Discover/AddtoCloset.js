@@ -1,5 +1,5 @@
 import React from 'react'
-import { Dropdown } from 'semantic-ui-react'
+import { Dropdown, Modal } from 'semantic-ui-react'
 import Button from '@material-ui/core/Button';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
@@ -32,7 +32,6 @@ class AddToCloset extends React.Component {
           <Button
             key={this.props.item.id}
             text={this.props.item.name}
-            onClick={this.props.turnOffDetails}
             onClick={this.handleClickOpen}
             variant="outlined"
             color="primary">
@@ -44,17 +43,22 @@ class AddToCloset extends React.Component {
               aria-labelledby="alert-dialog-title"
               aria-describedby="alert-dialog-description"
               >
-              <DialogTitle id="alert-dialog-title">{"ReQUEst pPoCeSSed!"}</DialogTitle>
+              <DialogTitle id="alert-dialog-title">"ReQUEst pPoCeSSed!"</DialogTitle>
               <DialogContent>
                 <DialogContentText id="alert-dialog-description">
                   CliCKIng ThaT AccePT BuTTTOn cOnFirmS yOu aRe ReQUesTing t0 BoRRow thIz IteM...
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <Button onClick={this.handleClose} color="primary">
-                  Disagree
-                </Button>
-                <Button onClick={()=>this.props.requestToBorrowItem(this.props.item.id)} color="primary" autoFocus>
+                <Button
+                  onClick={
+                    ()=>{
+                      this.props.requestToBorrowItem(this.props.item.id)
+                    }
+                  }
+                  color="primary"
+                  autoFocus
+                  >
                   Request
                 </Button>
               </DialogActions>
@@ -66,7 +70,6 @@ class AddToCloset extends React.Component {
             key={this.props.item.id}
             text={this.props.item.name}
             onClick={()=>this.props.acceptBorrow(this.props.item.id)}
-            onClick={this.props.turnOffDetails}
             >
             AcCePt BoRrOw ReQuEsT
           </Button>

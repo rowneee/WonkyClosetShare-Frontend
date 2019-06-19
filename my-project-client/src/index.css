@@ -396,3 +396,149 @@ html {
     height: 1600px;
   }
 }
+
+/* LOGIN */
+login-card {
+    margin: 0;
+    padding: 0;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 300px;
+    height: 800px;
+    /* height: 100vh; */
+    box-shadow: -0.6rem 0.6rem 0 rgba(29, 30, 28, 0.26);
+}
+
+input, .login-body, .login-header, .login-body__submit {
+    border: 2px solid rgba(0, 0, 0, 0.6);
+    background-image:none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    padding: 5px;
+    /* &:focus {
+        outline: none;
+    } */
+}
+
+.submit-button {
+  font-family: 'Audiowide';
+}
+
+.first-time {
+  margin-top: 32px;
+  text-align: center;
+  font-family: 'Audiowide';
+}
+
+input::placeholder {
+  font-family: 'Audiowide';
+}
+
+.login-body__email {
+  margin-top: 20px;
+  text-align: center;
+}
+
+textarea {
+  min-height: 50px;
+  resize:vertical;
+}
+
+.login-body__submit {
+  cursor: pointer;
+  font-weight: 500;
+  background-color: #dadad3;
+  margin-left: 145px;
+}
+
+.login-card {
+  border: 1px solid black;
+  max-width: 380px;
+  background-color: #fff;
+  margin: 0 auto;
+  box-shadow: $shadow;
+}
+
+.login-title {
+  font-family: 'Audiowide';
+}
+
+.login-header {
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  border-bottom: 1px solid black;
+}
+
+input {
+  background-color: #dadad3;
+  justify-content: center;
+}
+
+.login-body__submit {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+        /* &__message {
+            margin-top: 10px;
+        } */
+
+.login-body__submit {
+  margin-top: 10px;
+  /* align-self: flex-end; */
+}
+
+/* ITEM CARD */
+.item-card {
+  /* padding: 6px; */
+  border: 3px solid grey;
+  /* max-width: 500px; */
+  width: 300px;
+  height: 300px;
+  background-color: #F0F1F1;
+  margin: 9px;
+  box-shadow: $shadow;
+}
+
+.item-card-image {
+  width: 300px;
+  height: 70%;
+  padding: 6px;
+}
+
+.item-card-content {
+  margin-left: 4%;
+}
+
+.card-info {
+  text-align: center;
+}
+
+.item-card-topbar {
+  height: 6%;
+  background-color: blue;
+}
+
+.item-card-topbar-button {
+  background-color: #B7B8B8;
+  padding-left: 1.5%;
+  height: 70%;
+  width: 5%;
+  float: right;
+  margin-right: 3%;
+  margin-top: .9%;
+}
+
+.button-x {
+  height: 40px;
+}
+
+.borrow-button {
+  margin-top: 20%;
+}

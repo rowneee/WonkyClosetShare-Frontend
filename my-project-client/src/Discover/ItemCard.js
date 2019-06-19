@@ -1,5 +1,5 @@
   import React from 'react';
-import { Card, Image, Icon, Modal, Header } from 'semantic-ui-react'
+import { Image, Icon, Modal, Header } from 'semantic-ui-react'
 import AddToCloset from '/Users/ronishabo/Flatiron/Mod_5/WonkyClosetShare/WonkyClosetShare-Frontend/my-project-client/src/Discover/AddtoCloset.js'
 import {Animated} from "react-animated-css"
 import Button from '@material-ui/core/Button';
@@ -22,6 +22,7 @@ class ItemCard extends React.Component{
 
   requestToBorrowItem = (itemId) => {
     console.log(itemId, this.props.currentUser.id)
+    const token = localStorage.getItem('token')
     // e.preventDefault()
     // 1) make sure that some id is correct (rails console find(some_id))
     const API = `http://localhost:3000/api/v1/items/${itemId}`
@@ -31,7 +32,8 @@ class ItemCard extends React.Component{
       method: 'PATCH',
       headers:{
         Accept: 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        Authorization: `${token}`
       },
       body: JSON.stringify({
         status: "Pending",
@@ -91,38 +93,48 @@ class ItemCard extends React.Component{
   showModal = () => {
     this.setState({openModal: true})
   }
+  closeModal = () => {
+    this.setState({openModal: false})
+  }
 
   render() {
     console.log("itemmmm", this.props.item);
     if (this.state.details === false) {
       return (
-    <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true} style={{padding: "18px", color: "blue"}}>
-      <Card onClick={this.toggleDetails} >
-        <Image src={this.props.item.img_url} wrapped ui={false} style={{objectFit:"cover"}}/>
-        <Card.Content>
-          <Card.Header>{this.props.item.brand}</Card.Header>
-          <Card.Meta>OwNeR: {this.props.item.owner.username}</Card.Meta>
-          <Card.Description>
+    <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
+      <div className="item-card" onClick={this.toggleDetails} >
+        <div className="item-card-topbar">
+          <div className="item-card-topbar-button">
+            <p className="button-x">
+              x
+            </p>
+          </div>
+        </div>
+        <Image className="item-card-image" src={this.props.item.img_url} />
+        <div className="item-card-content">
+          <div className="item-card-header">{this.props.item.brand}</div>
+          <div className="item-card-info">OwNeR: {this.props.item.owner.username}</div>
+          <div className="item-card-info">
             AbOuT dIs IteM: {this.props.item.description}
-          </Card.Description>
-        </Card.Content>
-        <Card.Content extra>
+          </div>
+        </div>
+        <div className="item-card-info card-info" extra>
           <a>
             <Icon name='eye' />
             StAtUs: {this.props.item.status}
           </a>
-        </Card.Content>
-      </Card>
+        </div>
+      </div>
     </Animated>
   )}
   else if (this.state.details === true) {
     return (
       <Animated animationIn="flipInX" animationOut="fadeOut" isVisible={true}>
-        <Card >
-
-          <Card.Content>
+        <div className="item-card" >
+          <div className="item-card-content">
+              <center>
               <h4><b>{this.props.item.name}</b></h4>
-              <div>
+              <div className="borrow-button">
                 <AddToCloset
                   item={this.props.item}
                   isBorrowed={this.props.isBorrowed}
@@ -131,8 +143,11 @@ class ItemCard extends React.Component{
                   addNotification={this.props.addNotification}
                   turnOffDetails={this.turnOffDetails}
                   acceptBorrow={this.acceptBorrow}
+                  closeModal={this.closeModal}
                 />
-              <Modal trigger={<Button onClick={this.showModal} onClose={this.turnOffDetails}>MoRe DeTaIlZ</Button>}>
+                <br />
+              <Modal trigger={<Button onClick={this.showModal} onClose={this.turnOffDetails} variant="outlined"
+              color="primary">MoRe DeTaIlZ</Button>}>
                   <Modal.Header>{this.props.item.brand}</Modal.Header>
                   <Modal.Content image>
                     <Image wrapped size='medium' src={this.props.item.img_url} />
@@ -143,15 +158,14 @@ class ItemCard extends React.Component{
                     </Modal.Description>
                   </Modal.Content>
                 </Modal>
-                <Button onClick={this.turnOffDetails} >FliP baCK</Button>
+              <br />
+              <br />
+                <Button onClick={this.turnOffDetails} variant="outlined"
+                color="primary">FliP baCK</Button>
               </div>
-            <Card.Header>{this.props.item.name}</Card.Header>
-          <Card.Meta>{this.props.item.brand}</Card.Meta>
-        <Card.Description>
-          {this.props.item.description}
-        </Card.Description>
-        </Card.Content>
-      </Card>
+        </center>
+      </div>
+      </div>
       </Animated>
       )
     }
@@ -159,3 +173,9 @@ class ItemCard extends React.Component{
 }
 
 export default ItemCard
+
+// <div className="item-card-header">{this.props.item.name}</div>
+// <div className="item-card-info">{this.props.item.brand}</div>
+// <div className="item-card-info">
+// {this.props.item.description}
+// </div>

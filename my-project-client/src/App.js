@@ -32,7 +32,8 @@ class App extends React.Component {
     borrowedItems: [],
     borrowed: false,
     currentUser: {},
-    pendingItems: []
+    pendingItems: [],
+    status: ""
   }
 
   componentDidMount() {
@@ -41,7 +42,8 @@ class App extends React.Component {
     //make accessible through the store
 
 
-    if (!!token && !this.isLoggedIn) {
+    console.log(token, )
+    if (!!token && !this.props.isLoggedIn) {
       fetch('http://localhost:3000/api/v1/auto_login', {
         headers: {
           Authorization: `${token}`
@@ -51,11 +53,12 @@ class App extends React.Component {
       .then(data => {
         // dispatch the logged in user
         // data or data.user {id: 1, name: 'hi'}
-        this.setState({currentUser: data})
+        this.setState({currentUser: data}, () => {
+          this.fetchItems(this.state.currentUser)
+          this.getNotifications(this.state.currentUser)
+        })
         this.props.autoLogin(data)
-        this.fetchItems(this.state.currentUser)
         // if the item's owner_id matches the currentUser id then add to myItems
-        this.getNotifications(this.state.currentUser)
 
         // this.props.history.push()
         // dispatch to redux, that sets the current user in the redux store
@@ -74,6 +77,21 @@ class App extends React.Component {
   //   const requestedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
   //   this.setState({pendingItems: requestedItems})
   // }
+
+  resetState = () => {
+    this.setState({
+    items: [],
+    tops: [],
+    bottoms: [],
+    shoes: [],
+    accessories: [],
+    myItems: [],
+    borrowedItems: [],
+    borrowed: false,
+    currentUser: {},
+    pendingItems: [],
+    status: ""})
+  }
 
   handleSubmitNewItem = item => {
   console.log("da item", item)
@@ -182,6 +200,7 @@ class App extends React.Component {
                 onChosenItem={this.handleChosenItem}
                 addNotification={this.addNotification}
                 currentUser={this.state.currentUser}
+                status={this.state.status}
                 />}
               />
             <Route exact path="/profile" render={(props)=> <MyProfile {...props}
@@ -201,11 +220,12 @@ class App extends React.Component {
               />}
             />
             <Route exact path="/logout" render={(props)=> <Logout {...props}
+              resetState={this.resetState}
               />}
             />
             </div>
             <div>
-              <Route exact path="/login" render={props => <Login {...props} fetchItems={this.fetchItems}/>} />
+              <Route exact path="/login" render={props => <Login {...props} fetchItems={this.fetchItems} getNotifications={this.getNotifications}/>} />
               <Route exact path="/signup" component={SignUp} />
             </div>
         </div>

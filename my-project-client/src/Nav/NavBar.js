@@ -44,10 +44,7 @@ class NavBar extends React.Component {
                     </Link>
                   </div>
                 </IconButton>
-                <div className="dropdown-content">
-                  <a href="#">Find Some Clothes</a>
-                  <a href="#">Explore</a>
-                </div>
+                
               </div>
               {this.props.isLoggedIn ?
               <div>
