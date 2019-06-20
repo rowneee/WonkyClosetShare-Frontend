@@ -23,7 +23,6 @@ class AddToCloset extends React.Component {
 
   render() {
     console.log("ATC", this.props);
-    if (!this.props.isBorrowed) {
       return(
         <div>
         {this.props.item.status === "Not Borrowed"
@@ -65,15 +64,24 @@ class AddToCloset extends React.Component {
               </DialogActions>
             </Dialog>
             </>
-          :
+          : null
+          }
+          { this.props.item.status === "Pending"
+          ?
           <>
+          { this.props.item.owner_id === this.props.currentUser.id
+          ?
           <Button
             key={this.props.item.id}
             text={this.props.item.name}
             onClick={()=>this.props.acceptBorrow(this.props.item.id)}
+            variant="outlined"
+            color="primary"
             >
             AcCePt BoRrOw ReQuEsT
           </Button>
+          : null
+          }
           <Dialog
             open={this.state.open}
             onClose={this.handleClose}
@@ -95,11 +103,11 @@ class AddToCloset extends React.Component {
             </DialogActions>
           </Dialog>
           </>
-        }
+          : null
+          }
         </div>
       )
     }
-  }
 }
 
 

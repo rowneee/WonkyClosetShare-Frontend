@@ -39,12 +39,12 @@ class NavBar extends React.Component {
                   <div className="item">
                     <Link to="/discover">
                       <h2 className="item">
-                        DISCOVER
+                        DiScOVeR
                       </h2>
                     </Link>
                   </div>
                 </IconButton>
-                
+
               </div>
               {this.props.isLoggedIn ?
               <div>
@@ -53,7 +53,7 @@ class NavBar extends React.Component {
                     <div className="item">
                       <Link to="/profile">
                         <h2 className="item">
-                        MY CLOSET
+                        mY CloSEt
                         </h2>
                       </Link>
                     </div>

@@ -6,12 +6,13 @@ export default class NewItemForm extends React.Component {
 
 
 state = {
-  itemBrand: '',
-  itemColor: '',
-  itemSize: '',
-  itemDescription: '',
-  itemCategory: '',
-  itemIMG: ''
+  brand: '',
+  color: '',
+  size: '',
+  description: '',
+  category: '',
+  img_url: '',
+  status: ''
 }
 
 
@@ -24,19 +25,22 @@ handleChange = (event) => {
 
 handleSubmit = event => {
   event.preventDefault()
-  fetch('http://localhost:3000/api/items', {
+  const token = localStorage.getItem('token')
+  fetch('http://localhost:3000/api/v1/items', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Accept: 'application/json'
+      Accept: 'application/json',
+      "Authorization": `${token}`
     },
     body: JSON.stringify({
-      itemBrand: this.state.itemBrand,
-      itemColor: this.state.itemColor,
-      itemSize: this.state.itemSize,
-      itemDescription: this.state.itemDescription,
-      itemCategory: this.state.itemCategory,
-      itemIMG: this.state.itemIMG,
+      owner_id: this.props.currentUser.id,
+      brand: this.state.brand,
+      color: this.state.color,
+      size: this.state.size,
+      description: this.state.description,
+      category: this.state.category,
+      img_url: this.state.img_url,
       status: "Not Borrowed"
     })
   })
@@ -55,7 +59,7 @@ openWidget = () => {
   (error, result) => {
     if (result && result.event === "success") {
       this.setState({
-        image: `https://res.cloudinary.com/${"wonkycloud"}/image/upload/${result.info.path}`, uploaded: true
+        img_url: `https://res.cloudinary.com/${"wonkycloud"}/image/upload/${result.info.path}`, uploaded: true
       })
     }
   }
@@ -70,23 +74,23 @@ render() {
  return (
   <Form onSubmit={this.handleSubmit}>
     <Form.Field>
-      <label>Item Brand</label>
-      <input onChange={this.handleChange} name="item_name" placeholder='Brand' />
+      <label className="label-titles">Item Brand</label>
+      <input onChange={this.handleChange} name="brand" placeholder='Brand' />
     </Form.Field>
     <Form.Field>
-      <label>Color</label>
-      <input onChange={this.handleChange} name="item_color" placeholder='Color' />
+      <label className="label-titles">Color</label>
+      <input onChange={this.handleChange} name="color" placeholder='Color' />
     </Form.Field>
     <Form.Field>
-      <label>Size</label>
+      <label className="label-titles">Size</label>
       <input onChange={this.handleChange} name="size" placeholder='Size' />
     </Form.Field>
     <Form.Field>
-      <label>Description</label>
+      <label className="label-titles">Description</label>
       <input onChange={this.handleChange} name="description" placeholder='Description' />
     </Form.Field>
     <Form.Field>
-      <label>category</label>
+      <label className="label-titles">category</label>
       <input onChange={this.handleChange} name="category" placeholder='Category (example: Tops, Bottoms...)' />
     </Form.Field>
       <Button onClick={this.openWidget} variant="outlined"

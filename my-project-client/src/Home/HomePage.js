@@ -1,6 +1,6 @@
 import React from 'react'
 import SampleClothes from './SampleClothes'
-
+import {Animated} from "react-animated-css"
 
 class HomePage extends React.Component {
 
@@ -75,6 +75,30 @@ class HomePage extends React.Component {
               </p>
             </div>
           </div>
+          <Animated animationIn="rotateInDownRight" animationOut="fadeOut" isVisible={true}>
+            <div className="home-screen-card1">
+              <p className="zainy-title">
+                Hiiii ZaiNY KidZZZZZ
+                WelcoME 2 tha year 2003
+                PlzZZZ sign IN/siGn UP
+              </p>
+            </div>
+          </Animated>
+          <Animated animationIn="rotateInUpLeft" animationOut="fadeOut" isVisible={true}>
+          <div className="home-screen-card2">
+            <p className="zainy-title">
+              TiME to GeT yoUR ClOthez
+              zzzCHairKidzzz
+            </p>
+          </div>
+          </Animated>
+          <Animated animationIn="rotateInUpRight" animationOut="fadeOut" isVisible={true}>
+            <div className="home-screen-card3">
+              <p className="zainy-title">
+                CaLL YoUr MoM!!!!!!
+              </p>
+            </div>
+          </Animated>
         </div>
       </div>
     )

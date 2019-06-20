@@ -43,7 +43,7 @@ class ItemCard extends React.Component{
     .then(r => r.json())
     .then((data) => {
       console.log('data', data);
-      this.props.borrowItem(data.id)
+      this.props.borrowItem(data.id, this.props.currentUser.id)
       // this.props.addNotification(data.id)
     })
   }
@@ -67,6 +67,7 @@ class ItemCard extends React.Component{
     .then(r=>r.json())
     .then(data => {
       console.log("hiiii", data);
+      this.props.receiveAcceptedItem(data)
     })
   }
 
@@ -155,6 +156,7 @@ class ItemCard extends React.Component{
                   turnOffDetails={this.turnOffDetails}
                   acceptBorrow={this.acceptBorrow}
                   closeModal={this.closeModal}
+                  currentUser={this.props.currentUser}
                 />
                 <br />
               <Modal trigger={<Button onClick={this.showModal} variant="outlined"

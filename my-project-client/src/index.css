@@ -502,7 +502,7 @@ input {
   border: 3px solid grey;
   /* max-width: 500px; */
   width: 300px;
-  height: 320px;
+  height: 360px;
   background-color: #F0F1F1;
   margin: 9px;
   box-shadow: 2px 4px 4px #E538F3;
@@ -640,6 +640,10 @@ input {
   padding-top: 1%;
 }
 
+#sky {
+  position: fixed;
+}
+
 .white-box {
   background-color: white;
   /* padding-top: .8%; */
@@ -648,7 +652,55 @@ input {
   width: 600px;
 }
 
-.myspaceinput {
+.myspace-input {
   padding-left: 2%;
   font-family: 'Audiowide';
+}
+
+.label-titles {
+  font-family: 'Audiowide';
+}
+
+#sky {
+  position: fixed !important;
+}
+
+.home-screen-card1 {
+  border: 3px solid grey;
+  /* max-width: 500px; */
+  width: 610px;
+  height: 200px;
+  background-color: #F0F1F1;
+  /* margin: 9px; */
+  margin-top: 7%;
+  margin-left: 6.5%;
+  box-shadow: 2px 4px 4px #E538F3;
+}
+
+.home-screen-card2 {
+  border: 3px solid grey;
+  /* max-width: 500px; */
+  width: 400px;
+  height: 190px;
+  background-color: #F0F1F1;
+  margin: 9px;
+  margin-left: 64%;
+  box-shadow: 2px 4px 4px #E538F3;
+}
+
+.home-screen-card3 {
+  border: 3px solid grey;
+  /* max-width: 500px; */
+  width: 440px;
+  height: 70px;
+  background-color: #F0F1F1;
+  /* margin: 9px; */
+  margin-left: 6.5%;
+  box-shadow: 2px 4px 4px #E538F3;
+}
+
+.zainy-title {
+  font-family: 'Audiowide';
+  font-size: 40px;
+  color: #e812d2;
 }

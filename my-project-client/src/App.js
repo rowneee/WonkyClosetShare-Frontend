@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Sky from 'react-sky';
+// import Sky from './sky'
 
 import { login, autoLogin, itemsFetch } from './Actions/userActions'
 
@@ -118,12 +119,13 @@ class App extends React.Component {
     })
   }
 
-  receiveAcceptedItem = itemId => {
-    const updatedCloset = this.state.pendingItems.filter(item=> item.id===itemId)
-    this.setState({borrowedItems: updatedCloset})
+  receiveAcceptedItem = itemObj => {
+    const updatedCloset = this.state.pendingItems.filter(item=> item.id===itemObj.id)
+
+    this.setState({borrowedItems: updatedCloset, status: "Borrowed"})
   }
 
-  borrowItem = (itemId) => {
+  borrowItem = (itemId, borrowerId) => {
     // const itemsWithRemove = this.state.items.filter(item => item.id !== itemId)
     const updatedItems = this.state.borrowedItems.filter(item=> item.id===itemId)
 
@@ -180,17 +182,18 @@ class App extends React.Component {
     const isBorrowed = this.state.items.filter(item => item.borrowed)
     return (
       <div>
-        <Sky
-          images={{
-            0: "https://scubasanmateo.com/images/cotton-clipart-animated-10.png",
-            1: "http://gifgifs.com/animations/clothing/mens-clothes/Warm_pants.gif",
-            2: "https://bankkita.com/images1280_/orange-clipart-shoes-3.jpg"
-          }}
-          how={130}
-          time={40}
-          size={'50px'}
-          background={'#99ccff'}
-        />
+          <Sky
+            images={{
+              0: "https://scubasanmateo.com/images/cotton-clipart-animated-10.png",
+              1: "http://gifgifs.com/animations/clothing/mens-clothes/Warm_pants.gif",
+              2: "https://bankkita.com/images1280_/orange-clipart-shoes-3.jpg"
+            }}
+            how={130}
+            time={40}
+            size={'50px'}
+            background={'#99ccff'}
+            background-position={'fixed'}
+          />
 
       <div className="container">
           <NavBar isLoggedIn={this.props.isLoggedIn}/>
@@ -219,10 +222,13 @@ class App extends React.Component {
                 shoes={this.state.shoes}
                 isBorrowed={isBorrowed}
                 currentUser={this.state.currentUser}
+                handleSubmitNewItem={this.handleSubmitNewItem}
+
                 />}
               />
             <Route exact path="/notifications" render={(props)=> <Notifications {...props}
               pendingItems={this.state.pendingItems}
+              receiveAcceptedItem={this.receiveAcceptedItem}
               />}
             />
             <Route exact path="/logout" render={(props)=> <Logout {...props}

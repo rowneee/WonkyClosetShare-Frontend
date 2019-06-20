@@ -26,6 +26,7 @@ class Notifications extends React.Component {
         return <ItemCard
           acceptBorrow={this.props.acceptBorrow}
           item={item}
+          receiveAcceptedItem={this.props.receiveAcceptedItem}
           />
       })}
       </>

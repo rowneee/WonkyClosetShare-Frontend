@@ -25,7 +25,10 @@ class MyProfile extends React.Component {
         <center>
           <br />
           <br />
-          <NewItem handleSubmitNewItem={this.props.handleSubmitNewItem} />
+          <NewItem
+            handleSubmitNewItem={this.props.handleSubmitNewItem}
+            currentUser={this.props.currentUser} 
+            />
         </center>
         <SliderContainer
           accessories={this.sortItems("Accessories")}
